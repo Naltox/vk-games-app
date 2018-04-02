@@ -587,7 +587,7 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
         return (
             <Block>
                 <MarginV m={35}/>
-                <TextView fontSize={125} align="center">
+                <TextView fontSize={125} align="center" nowrap={true}>
                     🥇 {this.getWinner()}
                 </TextView>
             </Block>

@@ -21,15 +21,15 @@ export class BlockWithPlayers extends React.PureComponent<BlockWithPlayersProps,
             <div onClick={() => onClick()}>
                 <TreeBlock >
                     <MarginV m={5}/>
-                    <TextView align="center">
+                    <TextView align="center" nowrap={true}>
                         {data.firstPlayer}
                     </TextView>
                     <MarginV m={4}/>
-                    <TextView align="center">
+                    <TextView align="center" nowrap={true}>
                         {this.isScoreSet() ? `${data.firstPlayerScore} : ${data.secondPlayerScore}` : '✏️'}
                     </TextView>
                     <MarginV m={4}/>
-                    <TextView align="center">
+                    <TextView align="center" nowrap={true}>
                         {data.secondPlayer}
                     </TextView>
                     <MarginV m={5}/>

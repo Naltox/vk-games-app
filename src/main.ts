@@ -1,7 +1,7 @@
 import {
     app,
     BrowserWindow,
-    Menu
+    Menu,
 } from 'electron'
 
 

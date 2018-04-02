@@ -21,7 +21,9 @@ import TreeTestContainer from "./containers/treeTest/TreeTestContainer";
 import SurvivalGameDashboard from "./containers/survivalGameDasboard/SurvivalGameDashboard";
 import SurvivalGameDashboardAC from "./actionCreators/SurvivalGameDashboardAC";
 import LocalSurvivalGameRepository from "./infrastructure/repository/LocalSurvivalGameRepository";
-import SurvivalGameNode from "./domain/entity/SurvivalGameNode";
+import {webFrame} from 'electron'
+
+webFrame.setZoomLevelLimits(1, 1)
 
 const store = createStore(
     AppReducers,
