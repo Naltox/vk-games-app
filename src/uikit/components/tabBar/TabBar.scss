@@ -1,0 +1,55 @@
+.TabBar {
+  .Head {
+    height: 37px;
+    background-color: #ffffff;
+    border-bottom: solid 1px #e3e4e8;
+    box-sizing: border-box;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-top: 7px;
+
+    &_mobile {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .Left {
+      float: left;
+
+      &_mobile {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    .Right {
+      float: right;
+    }
+
+    .TabName {
+      padding-top: 8px;
+      padding-left: 14px;
+      padding-right: 14px;
+      padding-bottom: 12px;
+      float: left;
+      cursor: pointer;
+      color: #656565;
+      margin: 0 4px 0px;
+
+      &_mobile {
+        width: 100%;
+        text-align: center;
+      }
+
+      &Active {
+        color: #2b2f33;
+        border-bottom: solid 2px #6387ac!important;
+      }
+
+      &:hover {
+        border-bottom: solid 2px #cad2db;
+      }
+    }
+  }
+}

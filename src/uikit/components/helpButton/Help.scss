@@ -1,0 +1,15 @@
+.Help {
+  width: 15px;
+  height: 15px;
+  background-image: url('./help.svg');
+  float: left;
+  margin-left: 6px;
+  margin-top: 1px;
+  //cursor: pointer;
+}
+
+.Help:hover .Tooltip {
+  visibility: visible;
+  opacity: 1;
+  margin-top: -120px;
+}

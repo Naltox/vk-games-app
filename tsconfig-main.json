@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "dist/",
+    "sourceMap": true,
+    "target": "es6",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": [
+      "react",
+      "react-dom",
+      "nedb",
+      "redux",
+      "react-redux",
+      "redux-thunk",
+      "node"
+    ],
+    "allowJs": true,
+    "strictNullChecks": true,
+    "jsx": "react"
+  },
+  "include": [
+    "src/main.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

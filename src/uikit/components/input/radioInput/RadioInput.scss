@@ -1,0 +1,80 @@
+.RadioInput {
+  .item {
+    margin-bottom: 7px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  .Radio {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    //cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .circle {
+      width: 14px;
+      height: 14px;
+      background: #FFFFFF;
+      border: 1px solid #C3CAD2;
+      margin-right: 7px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .inCircle {
+      opacity: 0;
+      width: 6px;
+      height: 6px;
+      background: #6786AB;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .title {
+      font-size: 15px;
+      color: #2B2F33;
+      letter-spacing: 0;
+      line-height: 22px;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      word-break: break-word;
+      cursor: default;
+    }
+
+
+    &:hover {
+      .circle {
+        background-color: #EBEDF2;
+      }
+    }
+
+    &_checked {
+      .circle {
+        border-color: #6786AB;
+      }
+
+      .inCircle {
+        opacity: 1;
+      }
+    }
+
+    &_disabled {
+      .circle {
+        border-color: #E4E8EA;
+      }
+      .in-circle {
+        display: none;
+      }
+    }
+  }
+}

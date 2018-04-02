@@ -1,0 +1,46 @@
+.TextField {
+  width: 100%;
+  //border-radius: 0;
+  //border-width: 0 0 0 0;
+  //color: #2B2F33;
+  //background: #FFFFFF;
+  //font-size: 13px;
+  //letter-spacing: 0.3px;
+  //line-height: 17px; //32px;
+  //outline: 0;
+  //padding: 5px 0;
+  //margin: 0;
+
+
+  background: #FFFFFF;
+  border: 1px solid #C3CAD2;
+  border-radius: 2px;
+  font-size: 13.5px;
+  color: #000;
+  letter-spacing: 0.1px;
+  line-height: normal;
+  -webkit-appearance: none;
+  outline: 0;
+  padding: 0 10px;
+
+
+  //font-size: 19px;
+  //letter-spacing: 0.14px;
+  //line-height: 21px;// 47px;
+  //padding-top: 13px;
+  //padding-bottom: 13px;
+
+  height: 42px;
+  box-sizing: border-box;
+
+
+  &::-webkit-input-placeholder {
+    color:#808080;
+    font-weight: 100;
+  }
+
+  &_error {
+    background: #faeaea!important;
+    border: 1px solid #dcbcb8!important;
+  }
+}

@@ -1,0 +1,11 @@
+.Title {
+  font-size: 15px;
+  //margin-bottom: 12px;
+  color: #888888;
+  //margin-top: 25px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  user-select: none;
+  cursor: default;
+  white-space: nowrap;
+}

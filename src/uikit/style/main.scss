@@ -1,0 +1,61 @@
+.h, .h body, .h {
+  margin:0;
+  padding:0;
+  background: #FFF;
+}
+.h #root {
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  height: 100%;
+}
+
+#root {
+  position: relative;
+}
+
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin:0;
+  padding:0;
+  background: #FFF;
+}
+
+br {
+  line-height: 10%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #FFF;
+  color: #000;
+  direction: ltr;
+  font-size: 13px;
+  font-family: -apple-system,BlinkMacSystemFont,Roboto,Open Sans,Helvetica Neue,sans-serif;
+  line-height: 1.154;
+  font-weight: 400;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto
+}
+
+
+a {
+  text-decoration: none;
+  color: #2A5885;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+a:visited{
+  color: #2A5885;
+}
+
+a:hover {
+  text-decoration: underline;
+}

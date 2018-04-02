@@ -1,0 +1,31 @@
+
+.Block {
+  padding: 20px;
+  background-color: #2A5885;
+  color: #ffffff;
+  float: left;
+  border-radius: 5px;
+  position: absolute;
+  width: 60px;
+  text-align: center;
+}
+
+.Scale {
+  position: absolute;
+  right: 0;
+  z-index: 1000;
+}
+
+
+.Box {
+  padding: 5px;
+  background-color: #f0f2f5;
+  border-radius: 5px;
+}
+
+.VS {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-size: 15px;
+  text-align: center;
+}
