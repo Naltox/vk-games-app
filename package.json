@@ -38,11 +38,11 @@
     "typescript": "^2.7.2",
     "webpack": "^4.2.0",
     "webpack-cli": "^2.0.13",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-server": "^3.1.1",
+    "@types/node": "^9.6.0",
+    "@types/redux-thunk": "^2.1.0"
   },
   "dependencies": {
-    "@types/node": "^9.6.0",
-    "@types/redux-thunk": "^2.1.0",
     "nedb": "^1.8.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

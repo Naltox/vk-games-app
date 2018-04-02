@@ -3,7 +3,6 @@ import {TreeBlock} from "../block/TreeBlock";
 import SurvivalGameNode from "../../../domain/entity/SurvivalGameNode";
 import TextView from "../../../uikit/components/textView/TextView";
 import MarginV from "../../../uikit/components/marginV/MarginV";
-//const style = require('./BlockWithInputs.scss')
 
 interface BlockWithPlayersProps {
     data: SurvivalGameNode
