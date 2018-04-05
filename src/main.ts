@@ -51,7 +51,7 @@ function createWindow () {
         [{
             label: "Application",
             submenu: [
-                { label: "About Application", role: "orderFrontStandardAboutPanel" },
+                { label: "About Application", role: "about" },
                 { type: "separator" },
                 { label: "Quit", accelerator: "Command+Q", click: () => { app.quit() }}
             ]}, {
