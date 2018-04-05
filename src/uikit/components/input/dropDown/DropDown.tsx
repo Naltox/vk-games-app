@@ -1,8 +1,6 @@
 import * as React from 'react'
 import ReactDOM = require('react-dom');
-
 const style = require('./DropDown.scss')
-
 
 interface DropDownProps {
     items: string[]

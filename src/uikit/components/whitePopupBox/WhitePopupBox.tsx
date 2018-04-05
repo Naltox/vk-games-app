@@ -1,5 +1,4 @@
 import * as React from 'react'
-import OnclickOutside from "../onClickOutside/OnclickOutside";
 const style = require('./WhitePopupBox.scss')
 
 interface WhitePopupBoxProps {

@@ -1,13 +1,6 @@
 import {ActionCreator, creator} from "./ActionCreator";
-import {BasePlayersRepository} from "../domain/repository/BasePlayersRepository";
 import {BaseGamesRepository} from "../domain/repository/BaseGamesRepository";
 import LoadGame from "../actions/gamesList/LoadGame";
-import LoadPlayers from "../actions/game/LoadPlayers";
-import {BaseRoundsRepository} from "../domain/repository/BaseRoundsRepository";
-import LoadScore from "../actions/pointsGame/LoadScore";
-import GameRoundScore from "../domain/entity/GameRoundScore";
-import GamePlayer from "../domain/entity/GamePlayer";
-import LoadTableData from "../actions/pointsGame/LoadTableData";
 import {BaseSurvivalGameRepository} from "../domain/repository/BaseSurvivalGameRepository";
 import LoadSurvivalData from "../actions/survivalGame/LoadSurvivalData";
 import SurvivalGameNode from "../domain/entity/SurvivalGameNode";

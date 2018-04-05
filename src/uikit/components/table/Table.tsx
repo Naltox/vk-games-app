@@ -1,6 +1,5 @@
 import * as React from 'react'
 import Block from "../block/Block";
-import {TableHeadItem} from "./TableHeadItem";
 const style = require('./Table.scss')
 
 interface TableProps {

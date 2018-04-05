@@ -5,7 +5,6 @@ import {ActionCreators} from "../../actionCreators/ActionCreators";
 import Title from "../../uikit/components/title/Title";
 import Button from "../../uikit/components/input/button/Button";
 import Block from "../../uikit/components/block/Block";
-import BaseGame from "../../domain/entity/BaseGame";
 import Loader from "../../uikit/components/loader/Loader";
 import Flex from "../../uikit/components/flex/Flex";
 import MarginV from "../../uikit/components/marginV/MarginV";
@@ -15,10 +14,6 @@ import {PlayersList} from "../../components/playersList/PlayersList";
 import GameRoundScore from "../../domain/entity/GameRoundScore";
 import ProgressBar from "../../uikit/components/progressBar/ProgressBar";
 import GameForPoints from "../../domain/entity/GameForPoints";
-import {SeparatorLine} from "../../uikit/components/separatorLine/SeparatorLine";
-import TextField from "../../uikit/components/input/textField/TextField";
-import ScoreSelector from "../../components/pointsGame/scoreSelector/ScoreSelector";
-import BigTitle from "../../uikit/components/bigTitle/BigTitle";
 import Table from "../../uikit/components/table/Table";
 import {ResultsBoard} from "../../components/pointsGame/resultsBoard/ResultsBoard";
 import {RoundScore} from "../../components/pointsGame/roundScore/RoundScore";
@@ -26,8 +21,6 @@ import {TableHeadItem} from "../../uikit/components/table/TableHeadItem";
 import {TableLine} from "../../uikit/components/table/TableLine";
 import {TableCell} from "../../uikit/components/table/TableCell";
 import {PointsGameTableItem} from "../../actionCreators/PointsGameDashboardAC";
-import {Simulate} from "react-dom/test-utils";
-import keyDown = Simulate.keyDown;
 
 interface GameForPointsDashboardStateProps {
     dashboardGameId: string

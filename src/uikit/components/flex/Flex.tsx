@@ -1,6 +1,5 @@
 import * as React from 'react'
 
-
 interface FlexProps {
     align?: 'center' | 'start' | 'end',
     justify?: 'center' | 'space-around' | 'space-between',

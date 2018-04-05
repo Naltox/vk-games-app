@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {combine, styleIf, styleSwitch} from "../../../utils/style";
+import {combine, styleIf} from "../../../utils/style";
 const style = require('./RadioInput.scss')
 
 interface RadioInputProps {

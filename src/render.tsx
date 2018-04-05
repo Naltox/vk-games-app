@@ -17,7 +17,6 @@ import Action from "./actions/Action";
 import GameForPointsDashboard from "./containers/gameForPointsDashboard/GameForPointsDashboard";
 import PointsGameDashboardAC from "./actionCreators/PointsGameDashboardAC";
 import LocalRoundsRepository from "./infrastructure/repository/LocalRoundsRepository";
-import TreeTestContainer from "./containers/treeTest/TreeTestContainer";
 import SurvivalGameDashboard from "./containers/survivalGameDasboard/SurvivalGameDashboard";
 import SurvivalGameDashboardAC from "./actionCreators/SurvivalGameDashboardAC";
 import LocalSurvivalGameRepository from "./infrastructure/repository/LocalSurvivalGameRepository";
@@ -41,7 +40,6 @@ let survivalGameRepository = new LocalSurvivalGameRepository()
 const appRoutingSchema = {
     'gamesList': GamesListContainer,
     'pointsGameDashboard': GameForPointsDashboard,
-    'treeTest': TreeTestContainer,
     'survivalGameDashboard': SurvivalGameDashboard
 }
 
