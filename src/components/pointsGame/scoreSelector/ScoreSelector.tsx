@@ -5,7 +5,7 @@ const style = require('./ScoreSelector.scss')
 interface ScoreSelectorProps {
     maxScore: number
     selectedScore: number
-    onChange: (score: number) => void
+    onChange(score: number)
 }
 
 export default class ScoreSelector extends React.Component<ScoreSelectorProps, {}> {

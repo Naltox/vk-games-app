@@ -5,7 +5,7 @@ import Button, {ButtonType} from "../../../uikit/components/input/button/Button"
 import MarginV from "../../../uikit/components/marginV/MarginV";
 
 interface NoGamesProps {
-    onCreateGame: () => void
+    onCreateGame()
 }
 
 export const NoGames: React.SFC<NoGamesProps> = props => {

@@ -1,7 +1,7 @@
 import * as React from 'react'
 const style = require('./Title.scss')
 
-export interface TitleProps {
+interface TitleProps {
     text: string
 }
 

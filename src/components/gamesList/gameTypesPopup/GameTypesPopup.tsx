@@ -6,7 +6,7 @@ import BigTitle from "../../../uikit/components/bigTitle/BigTitle";
 import TextView from "../../../uikit/components/textView/TextView";
 
 interface GameTypesPopupProps {
-    onClose: () => void
+    onClose()
 }
 
 export const GameTypesPopup: React.SFC<GameTypesPopupProps> = props => {

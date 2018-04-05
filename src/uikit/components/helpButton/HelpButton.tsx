@@ -1,8 +1,8 @@
 import * as React from 'react'
 const style = require('./Help.scss')
 
-export interface HelpButtonProps {
-    onClick?: () => void
+interface HelpButtonProps {
+    onClick?()
 }
 
 export default class HelpButton extends React.Component<HelpButtonProps, {}> {

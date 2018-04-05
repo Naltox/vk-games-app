@@ -1,7 +1,7 @@
 import * as React from 'react'
 const style = require('./BigTitle.scss')
 
-export interface BigTitleProps {
+interface BigTitleProps {
     text: string
 }
 

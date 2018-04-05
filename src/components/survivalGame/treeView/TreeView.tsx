@@ -7,7 +7,7 @@ interface TreeViewProps {
     blockWidth: number
     blockHeight: number
     firstLineItemsCount: number
-    block: (line: number, blockIndex: number) => React.ReactNode
+    block(line: number, blockIndex: number)
     blocksOffset: number
     linesOffset: number
 }

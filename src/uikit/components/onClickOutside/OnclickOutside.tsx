@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-export interface ClickOnclickOutside {
-    onClick: (e: Event) => void
+interface ClickOnclickOutside {
+    onClick(e: Event)
 }
 
 export default class OnclickOutside extends React.Component<ClickOnclickOutside, {}> {

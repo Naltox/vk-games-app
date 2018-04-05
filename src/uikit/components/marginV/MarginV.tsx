@@ -6,7 +6,7 @@ import * as React from 'react'
  * Useful for vertical margins
  */
 
-export interface MarginVProps {
+interface MarginVProps {
     m: number
 }
 

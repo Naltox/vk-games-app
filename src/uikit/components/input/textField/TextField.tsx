@@ -4,7 +4,7 @@ const style = require('./TextField.scss')
 
 interface ButtonProps {
     value: string
-    onChange: (value: string) => void
+    onChange(value: string)
     placeholder?: string
     error?: boolean
     height?: number

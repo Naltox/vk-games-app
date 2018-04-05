@@ -1,11 +1,11 @@
 import * as React from 'react'
 
-export interface BlockProps {
+interface BlockProps {
     width?: number
     height?: number|string
     padding?: number|string
     float?: 'left'|'right'
-    onClick?: () => void
+    onClick?()
     wh100?: boolean
     flexShrink?: number
     overflow?: "auto" | "hidden" | "scroll" | "visible" | "inherit"

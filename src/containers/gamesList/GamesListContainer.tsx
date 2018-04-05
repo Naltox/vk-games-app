@@ -19,7 +19,7 @@ import GameForPoints from "../../domain/entity/GameForPoints";
 import SurvivalGame from "../../domain/entity/SurvivalGame";
 const style = require('./GamesList.scss')
 
-export interface GamesListContainerProps {
+interface GamesListContainerProps {
     games?: BaseGame[]
 }
 

@@ -8,10 +8,10 @@ import Button from "../../../uikit/components/input/button/Button";
 import XButton from "../../../uikit/components/xButton/XButton";
 import {notBlankString} from "../../../utils/FormValidation";
 
-export interface PlayersCreationPopupProps {
+interface PlayersCreationPopupProps {
     minCount: number
-    onClose: () => void
-    onSave: (players: string[]) => void
+    onClose()
+    onSave(players: string[])
 }
 
 interface PlayersCreationPopupState {

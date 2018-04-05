@@ -1,11 +1,11 @@
 import * as React from 'react'
 const style = require('./TabBar.scss')
 
-export interface TabBarProps {
+interface TabBarProps {
     tabs: React.ReactNode[]
     tabsOptions: { name: string, side?: 'left'|'right' }[]
     currentTab: number
-    onChange: (tab: number) => void
+    onChange(tab: number)
 }
 
 export default class TabBar extends React.Component<TabBarProps, {}> {

@@ -2,10 +2,10 @@ import * as React from 'react'
 import OnclickOutside from "../onClickOutside/OnclickOutside";
 const style = require('./WhitePopupBox.scss')
 
-export interface WhitePopupBoxProps {
+interface WhitePopupBoxProps {
     width?: number
     height?: number
-    onClose: () => void
+    onClose()
 }
 
 export default class WhitePopupBox extends React.Component<WhitePopupBoxProps, {}> {

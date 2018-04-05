@@ -1,8 +1,8 @@
 import * as React from 'react'
 const style = require('./XButton.scss')
 
-export interface XButtonProps {
-    onClick?: () => void
+interface XButtonProps {
+    onClick?()
 }
 
 export default class XButton extends React.Component<XButtonProps, {}> {

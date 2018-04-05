@@ -7,7 +7,7 @@ import TextView from "../../uikit/components/textView/TextView";
 
 interface ErrorPopupProps {
     errorText: string
-    onClose: () => void
+    onClose:()
 }
 
 export const ErrorPopup: React.SFC<ErrorPopupProps> = props => {

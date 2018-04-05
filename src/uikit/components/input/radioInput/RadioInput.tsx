@@ -5,7 +5,7 @@ const style = require('./RadioInput.scss')
 interface RadioInputProps {
     titles: string[]
     selected: number
-    onChange: (selected: number) => void
+    onChange(selected: number)
 }
 
 export default class RadioInput extends React.Component<RadioInputProps, {}> {

@@ -1,4 +1,3 @@
-import GameRoundScore from "../entity/GameRoundScore";
 import SurvivalGameNode from "../entity/SurvivalGameNode";
 
 export abstract class BaseSurvivalGameRepository {

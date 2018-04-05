@@ -1,12 +1,10 @@
 import * as React from 'react'
-import Button, {ButtonType} from "../input/button/Button";
 import {ReactNode} from "react";
-import OnclickOutside from "../onClickOutside/OnclickOutside";
 const style = require('./PopupBox.scss')
 
-export interface PopupBoxProps {
+interface PopupBoxProps {
     title: string,
-    onClose: () => void,
+    onClose(),
     body: ReactNode,
     bottom?: ReactNode,
     width?: number
@@ -25,7 +23,6 @@ export default class PopupBox extends React.Component<PopupBoxProps, {}> {
         return (
             <div className={style.QuoteCreationModal}>
                 <div className={style.Back} onClick={() => onClose()}/>
-                {/*<OnclickOutside onClick={onClose}>*/}
                     <div className={style.Modal} style={{ width: width || 456}}>
                         <div className={style.Head}>
                             <div className={style.Title}>{title}</div>
@@ -43,7 +40,6 @@ export default class PopupBox extends React.Component<PopupBoxProps, {}> {
                             <div/>
                         )}
                     </div>
-                {/*</OnclickOutside>*/}
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 
-export interface FlexProps {
+interface FlexProps {
     align?: 'center' | 'start' | 'end',
     justify?: 'center' | 'space-around' | 'space-between',
     direction?: 'row' | 'column'

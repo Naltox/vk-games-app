@@ -26,10 +26,10 @@ export interface NewGameInfo {
     playersCount: number
 }
 
-export interface NewGamePopupProps {
-    onClose: () => void
-    onSave: (game: NewGameInfo) => void
-    onHelp: () => void
+interface NewGamePopupProps {
+    onClose()
+    onSave(game: NewGameInfo)
+    onHelp()
 }
 
 interface NewGamePopupState {

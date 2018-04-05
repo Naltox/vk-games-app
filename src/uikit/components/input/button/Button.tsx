@@ -5,7 +5,7 @@ const style = require('./Button.scss')
 interface ButtonProps {
     text: string
     disabled?: boolean
-    onClick?: () => void
+    onClick?()
     minWidth?: number
     type?: ButtonType
     selected?: boolean
