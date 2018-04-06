@@ -6,7 +6,7 @@ import TextField from "../../../uikit/components/input/textField/TextField";
 import Block from "../../../uikit/components/block/Block";
 import Button from "../../../uikit/components/input/button/Button";
 import XButton from "../../../uikit/components/xButton/XButton";
-import {notBlankString} from "../../../utils/FormValidation";
+import {isBlankString} from "../../../utils/FormValidation";
 
 interface PlayersCreationPopupProps {
     minCount: number
@@ -43,6 +43,7 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
                 <PopupBox
                     title="Участники игры"
                     onClose={onClose}
+                    closeFromOutside={!this.haveAnyData()}
                     body={
                         <Flex direction="column">
                             {this.renderPlayers()}
@@ -171,7 +172,7 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
         let errors: boolean[] = []
 
         for (let player of players) {
-            let validation = notBlankString(player)
+            let validation = isBlankString(player)
             errors.push(validation)
 
             if (validation)
@@ -182,5 +183,13 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
 
         if (validationOk)
             onSave(players)
+    }
+
+    private haveAnyData(): boolean {
+        let {
+            players
+        } = this.state
+
+        return !!players.find(pl => !isBlankString(pl))
     }
 }

@@ -29,7 +29,7 @@ export function validateForm(rules: ValidationRules, data: FormData): any {
     return result
 }
 
-export function notBlankString(str: string): boolean {
+export function isBlankString(str: string): boolean {
     return (!str || /^\s*$/.test(str))
 }
 

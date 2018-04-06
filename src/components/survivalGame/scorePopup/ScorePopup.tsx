@@ -52,6 +52,7 @@ export class ScorePopup extends React.Component<ScorePopupProps, ScorePopupState
             <PopupBox
                 title="Счет"
                 onClose={onClose}
+                closeFromOutside={true}
                 body={
                     <Block>
                         <Title text={firstPlayer + ':'}/>

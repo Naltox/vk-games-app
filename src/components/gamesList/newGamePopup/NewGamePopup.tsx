@@ -8,8 +8,7 @@ import Block from "../../../uikit/components/block/Block";
 import Button from "../../../uikit/components/input/button/Button";
 import RadioInput from "../../../uikit/components/input/radioInput/RadioInput";
 import HelpButton from "../../../uikit/components/helpButton/HelpButton";
-import {ErrorPopup} from "../../errorPopup/ErrorPopup";
-import {isFormValidationOk, notBlankString, positiveNumber, validateForm} from "../../../utils/FormValidation";
+import {isFormValidationOk, isBlankString, positiveNumber, validateForm} from "../../../utils/FormValidation";
 import DropDown from "../../../uikit/components/input/dropDown/DropDown";
 
 export enum GameType {
@@ -40,9 +39,6 @@ interface NewGamePopupState {
     maxPoints: string
     playersCount: number
 
-    showError: boolean
-    errorText: string,
-
     nameErr: boolean
     roundsNumberErr: boolean
     winnersCountErr: boolean
@@ -63,9 +59,6 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
             maxPoints: '',
             playersCount: 0,
 
-            showError: false,
-            errorText: '',
-
             nameErr: false,
             roundsNumberErr: false,
             winnersCountErr: false,
@@ -83,9 +76,6 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
             name,
             type,
 
-            showError,
-            errorText,
-
             nameErr,
         } = this.state
 
@@ -94,6 +84,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                 <PopupBox
                     title="Новая игра"
                     onClose={onClose}
+                    closeFromOutside={!this.haveAnyData()}
                     body={
                         <Flex direction="column">
                             <Title text="Название игры"/>
@@ -143,9 +134,6 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                     }
                     width={500}
                 />
-                {showError ?
-                    (<ErrorPopup errorText={errorText} onClose={this.closeError}/>) :
-                <div/>}
             </div>
         )
     }
@@ -252,7 +240,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
         if (type === 0) {
             validation = validateForm(
                 {
-                    name: notBlankString,
+                    name: isBlankString,
                     roundsNumber: positiveNumber,
                     winnersCount: positiveNumber,
                     maxPoints: positiveNumber
@@ -263,7 +251,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
         else {
             validation = validateForm(
                 {
-                    name: notBlankString,
+                    name: isBlankString,
                     maxPoints: positiveNumber
                 },
                 this.state
@@ -294,17 +282,20 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
         }
     }
 
-    private showError(text: string) {
-        this.setState({
-            showError: true,
-            errorText: text
-        })
-    }
+    private haveAnyData(): boolean {
+        let {
+            name,
+            roundsNumber,
+            winnersCount,
+            maxPoints
+        } = this.state
 
-    private closeError = () => {
-        this.setState({
-            showError: false,
-            errorText: ''
-        })
+
+        return (
+            !isBlankString(name) ||
+            !isBlankString(roundsNumber) ||
+            !isBlankString(winnersCount) ||
+            !isBlankString(maxPoints)
+        )
     }
 }
