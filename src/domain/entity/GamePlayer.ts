@@ -2,7 +2,8 @@ export default class GamePlayer {
     constructor(
         readonly id: string,
         readonly gameId: number,
-        readonly name: string
+        readonly name: string,
+        readonly index: number
     ) {
 
     }
@@ -11,7 +12,8 @@ export default class GamePlayer {
         return new GamePlayer(
             raw['_id'],
             raw['gameId'],
-            raw['name']
+            raw['name'],
+            raw['index'] || 0
         )
     }
 }

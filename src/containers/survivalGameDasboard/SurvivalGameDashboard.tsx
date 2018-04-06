@@ -248,8 +248,8 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
         let players: GamePlayer[] = []
 
         nodes.forEach(node => {
-            players.push(new GamePlayer('', 0, node.firstPlayer))
-            players.push(new GamePlayer('', 0, node.secondPlayer))
+            players.push(new GamePlayer('', 0, node.firstPlayer, 0))
+            players.push(new GamePlayer('', 0, node.secondPlayer, 0))
         })
 
         return (

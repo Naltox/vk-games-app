@@ -20,10 +20,11 @@ export default class LocalPlayersRepository extends BasePlayersRepository {
     public async addGamePlayers(gameId: string, players: string[]): Promise<void> {
         await insert(
             this.db,
-            players.map(name => {
+            players.map((name, index) => {
                 return {
                     gameId,
-                    name
+                    name,
+                    index
                 }
             })
         )
@@ -36,6 +37,6 @@ export default class LocalPlayersRepository extends BasePlayersRepository {
     public async getPlayers(gameId: string): Promise<GamePlayer[]> {
         let data = await find(this.db, { gameId }) as any
 
-        return data.map(GamePlayer.deserialize)
+        return data.map(GamePlayer.deserialize).sort((a, b) => a.index - b.index)
     }
 }
