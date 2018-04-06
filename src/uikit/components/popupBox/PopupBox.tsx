@@ -11,6 +11,19 @@ interface PopupBoxProps {
 }
 
 export default class PopupBox extends React.Component<PopupBoxProps, {}> {
+    private keyUpListener = event => {
+        if (event.keyCode == 27)
+            this.props.onClose()
+    }
+
+    componentDidMount() {
+        document.addEventListener('keyup', this.keyUpListener)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keyup', this.keyUpListener)
+    }
+
     render() {
         let {
             title,

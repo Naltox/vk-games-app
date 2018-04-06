@@ -31,7 +31,6 @@ const store = createStore(
 
 const dispatch = (action: Action) => store.dispatch(action.serialize())
 
-
 let gamesRepository = new LocalGamesRepository()
 let playersRepository = new LocalPlayersRepository()
 let roundsRepository = new LocalRoundsRepository()

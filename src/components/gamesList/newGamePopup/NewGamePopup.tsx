@@ -82,17 +82,11 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
         let {
             name,
             type,
-            roundsNumber,
-            winnersCount,
-            maxPoints,
 
             showError,
             errorText,
 
             nameErr,
-            roundsNumberErr,
-            winnersCountErr,
-            maxPointsErr
         } = this.state
 
         return (
