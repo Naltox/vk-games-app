@@ -8,7 +8,7 @@
   letter-spacing: 0.1px;
   border: none;
   zoom: 1;
-  cursor: default;
+  cursor: pointer;
   white-space: nowrap;
   outline: none;
   font-family: -apple-system,BlinkMacSystemFont,Roboto,Open Sans,Helvetica Neue,sans-serif;
@@ -30,9 +30,9 @@
     font-size: 15px;
   }
 
-  //&:hover {
-  //  background-color: #DFE6ED;
-  //}
+  &:hover {
+    background-color: #DFE6ED;
+  }
 
   &:active {
     background-color: #DFE6ED;
@@ -41,9 +41,9 @@
   &--primary {
     background: #5181b8;
     color: #FFFFFF;
-    //&:hover {
-    //  background: #6888AD;
-    //}
+    &:hover {
+      background: #5b88bd;
+    }
     &:active {
       background: #5D7EA4;
     }
@@ -52,18 +52,18 @@
   &--light {
     background: #e5ebf1;
     color: #55677d;
-    //&:hover {
-    //  background: #D3DCE6;
-    //}
+    &:hover {
+      background: #D3DCE6;
+    }
   }
 
   &--big_primary {
     padding: 10px 23px;
     background: #5181b8;
     color: #FFFFFF;
-    //&:hover {
-    //  background: #6888AD;
-    //}
+    &:hover {
+      background: #6888AD;
+    }
     &:active {
       background: #5D7EA4;
     }
@@ -73,9 +73,9 @@
     padding: 10px 23px;
     background: #dfe6ed;
     color: #55677d;
-    //&:hover {
-    //  background: #D3DCE6;
-    //}
+    &:hover {
+      background: #D3DCE6;
+    }
   }
 
   &--white {

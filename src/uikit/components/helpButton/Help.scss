@@ -4,8 +4,13 @@
   background-image: url('./help.svg');
   float: left;
   margin-left: 6px;
-  margin-top: 1px;
-  //cursor: pointer;
+  margin-top: 2px;
+  cursor: pointer;
+  opacity: .7;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .Help:hover .Tooltip {

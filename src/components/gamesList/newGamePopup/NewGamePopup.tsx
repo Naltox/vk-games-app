@@ -245,7 +245,8 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                     winnersCount: positiveNumber,
                     maxPoints: positiveNumber
                 },
-                this.state
+                this.state,
+                true
             )
         }
         else {
@@ -254,7 +255,8 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                     name: isBlankString,
                     maxPoints: positiveNumber
                 },
-                this.state
+                this.state,
+                true
             )
         }
 
@@ -269,8 +271,18 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                 maxPoints: parseInt(maxPoints, 10),
                 playersCount: parseInt(PLAYERS_COUNT[playersCount], 10)
             })
+
+            return
         }
 
+        setTimeout(() => {
+            this.setState({
+                nameErr: false,
+                roundsNumberErr: false,
+                winnersCountErr: false,
+                maxPointsErr: false
+            })
+        }, 500)
     }
 
     private typeToStr(type: GameType): string {

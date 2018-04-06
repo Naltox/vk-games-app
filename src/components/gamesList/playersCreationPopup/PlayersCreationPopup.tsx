@@ -43,7 +43,7 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
                 <PopupBox
                     title="Участники игры"
                     onClose={onClose}
-                    closeFromOutside={!this.haveAnyData()}
+                    closeFromOutside={false}
                     body={
                         <Flex direction="column">
                             {this.renderPlayers()}
@@ -165,7 +165,7 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
         } = this.state
 
         let {
-            onSave
+            onSave,
         } = this.props
 
         let validationOk = true
@@ -173,7 +173,7 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
 
         for (let player of players) {
             let validation = isBlankString(player)
-            errors.push(validation)
+            errors.push(validationOk ? validation : false)
 
             if (validation)
                 validationOk = false
@@ -181,8 +181,14 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
 
         this.setState({ errors })
 
-        if (validationOk)
+        if (validationOk) {
             onSave(players)
+            return
+        }
+
+        setTimeout(() => {
+            this.setState({ errors: [] })
+        }, 500)
     }
 
     private haveAnyData(): boolean {

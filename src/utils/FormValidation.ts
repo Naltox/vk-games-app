@@ -16,14 +16,19 @@ export function isFormValidationOk(formValidation: FormValidation): boolean {
     return true
 }
 
-export function validateForm(rules: ValidationRules, data: FormData): any {
+export function validateForm(rules: ValidationRules, data: FormData, returnOnFirstError = false): any {
     let result = {}
 
     for (let key in rules) {
         let validator = rules[key]
         let val = data[key]
 
-        result[key + 'Err'] = validator(val)
+        let err = validator(val)
+
+        result[key + 'Err'] = err
+
+        if (err && returnOnFirstError)
+            return result
     }
 
     return result
