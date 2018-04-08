@@ -14,7 +14,7 @@ import Loader from "../../uikit/components/loader/Loader";
 import TreeView from "../../components/survivalGame/treeView/TreeView";
 import {BlockWithInputs} from "../../components/survivalGame/blockWithInputs/BlockWithInputs";
 import {BlockEmpty} from "../../components/survivalGame/blockEmpty/BlockEmpty";
-import {isBlankString} from "../../utils/FormValidation";
+import {notBlankString} from "../../utils/FormValidation";
 import {ScorePopup} from "../../components/survivalGame/scorePopup/ScorePopup";
 import SurvivalGameNode from "../../domain/entity/SurvivalGameNode";
 import TabBar from "../../uikit/components/tabBar/TabBar";
@@ -463,7 +463,7 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
             let f = players[`${i}_${0}`] || ''
             let s = players[`${i}_${1}`] || ''
 
-            if (isBlankString(f) || isBlankString(s))
+            if (notBlankString(f) || notBlankString(s))
                 return false
         }
 

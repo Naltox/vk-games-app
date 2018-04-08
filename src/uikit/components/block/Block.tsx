@@ -30,7 +30,6 @@ export default class Block extends React.Component<BlockProps, {}> {
             width,
             padding,
             float,
-            boxSizing: 'border-box',
             flexShrink,
             height,
             overflow,
@@ -39,8 +38,9 @@ export default class Block extends React.Component<BlockProps, {}> {
                     width: '100%',
                     height: '100%'
                 } : {}
-            )
-        }
+            ),
+            boxSizing: 'border-box'
+        } as React.CSSProperties
 
         return (
             <div style={style} onClick={() => onClick ? onClick() : ''}>

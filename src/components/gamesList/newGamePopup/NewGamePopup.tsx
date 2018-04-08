@@ -8,8 +8,14 @@ import Block from "../../../uikit/components/block/Block";
 import Button from "../../../uikit/components/input/button/Button";
 import RadioInput from "../../../uikit/components/input/radioInput/RadioInput";
 import HelpButton from "../../../uikit/components/helpButton/HelpButton";
-import {isFormValidationOk, isBlankString, positiveNumber, validateForm} from "../../../utils/FormValidation";
+import {
+    combineValidator, lessThan, notBlankString, positiveNumber,
+    validateFormByOne, ValidationRules
+} from "../../../utils/FormValidation";
 import DropDown from "../../../uikit/components/input/dropDown/DropDown";
+import Timer = NodeJS.Timer;
+import {CreateRef} from "../../../utils/React";
+import Tooltip from "../../../uikit/components/tooltip/Tooltip";
 
 export enum GameType {
     ForPoints,
@@ -43,11 +49,37 @@ interface NewGamePopupState {
     roundsNumberErr: boolean
     winnersCountErr: boolean
     maxPointsErr: boolean
+
+    showRoundsNumberTooltip: boolean
+    showWinnersCountTooltip: boolean
+    showMaxPointsCountTooltip: boolean
 }
 
 const PLAYERS_COUNT = ['4', '8', '16', '32', '64']
 
+const CLOSED_TOOLTIPS_STATE = {
+    showRoundsNumberTooltip: false,
+    showWinnersCountTooltip: false,
+    showMaxPointsCountTooltip: false
+}
+
+const NO_ERRORS_STATE = {
+    nameErr: false,
+    roundsNumberErr: false,
+    winnersCountErr: false,
+    maxPointsErr: false,
+}
+
+
 export default class NewGamePopup extends React.Component<NewGamePopupProps, NewGamePopupState> {
+    private errorTimeout: Timer
+    private tooltipsTimeout: Timer
+
+    private nameRef = CreateRef()
+    private roundsNumberRef = CreateRef()
+    private winnersCountRef = CreateRef()
+    private maxPointsRef = CreateRef()
+
     constructor(props) {
         super(props)
 
@@ -62,8 +94,20 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
             nameErr: false,
             roundsNumberErr: false,
             winnersCountErr: false,
-            maxPointsErr: false
+            maxPointsErr: false,
+
+            showRoundsNumberTooltip: false,
+            showWinnersCountTooltip: false,
+            showMaxPointsCountTooltip: false
         }
+
+
+
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.errorTimeout)
+        clearTimeout(this.tooltipsTimeout)
     }
 
     render() {
@@ -88,6 +132,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                     body={
                         <Flex direction="column">
                             <Title text="Название игры"/>
+
                             <MarginV m={15}/>
                             <TextField
                                 value={name}
@@ -96,6 +141,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                                 }}
                                 placeholder="Название игры"
                                 error={nameErr}
+                                inputRef={this.nameRef}
                             />
 
                             <MarginV m={20}/>
@@ -146,11 +192,18 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
 
             roundsNumberErr,
             winnersCountErr,
-            maxPointsErr
+            maxPointsErr,
+
+            showRoundsNumberTooltip,
+            showWinnersCountTooltip,
+            showMaxPointsCountTooltip
         } = this.state
 
         return (
             <div>
+                <Tooltip show={showRoundsNumberTooltip}>
+                    Количество раундов не может быть больше ста
+                </Tooltip>
                 <Title text="Количество раундов"/>
                 <MarginV m={15}/>
                 <TextField
@@ -158,10 +211,14 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                     onChange={roundsNumber => this.setState({ roundsNumber })}
                     placeholder="Количество раундов"
                     error={roundsNumberErr}
+                    inputRef={this.roundsNumberRef}
                 />
 
                 <MarginV m={20}/>
 
+                <Tooltip show={showWinnersCountTooltip}>
+                    Количество призовых мест не может быть больше ста
+                </Tooltip>
                 <Title text="Количество призовых мест"/>
                 <MarginV m={15}/>
                 <TextField
@@ -169,10 +226,14 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                     onChange={winnersCount => this.setState({ winnersCount })}
                     placeholder="Количество призовых мест"
                     error={winnersCountErr}
+                    inputRef={this.winnersCountRef}
                 />
 
                 <MarginV m={20}/>
 
+                <Tooltip show={showMaxPointsCountTooltip}>
+                    Максимальный балл не может быть больше ста
+                </Tooltip>
                 <Title text="Максимальный балл"/>
                 <MarginV m={15}/>
                 <TextField
@@ -180,6 +241,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                     onChange={maxPoints => this.setState({ maxPoints })}
                     placeholder="Максимальный балл"
                     error={maxPointsErr}
+                    inputRef={this.maxPointsRef}
                 />
             </div>
         )
@@ -190,7 +252,9 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
             maxPoints,
             playersCount,
 
-            maxPointsErr
+            maxPointsErr,
+
+            showMaxPointsCountTooltip
         } = this.state
 
         return (
@@ -209,6 +273,9 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
 
                 <MarginV m={20}/>
 
+                <Tooltip show={showMaxPointsCountTooltip}>
+                    Максимальный балл не может быть больше ста
+                </Tooltip>
                 <Title text="Максимальный балл"/>
                 <MarginV m={15}/>
                 <TextField
@@ -216,6 +283,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                     onChange={maxPoints => this.setState({ maxPoints })}
                     placeholder="Максимальный балл"
                     error={maxPointsErr}
+                    inputRef={this.maxPointsRef}
                 />
             </div>
         )
@@ -235,34 +303,39 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
             onSave
         } = this.props
 
-        let validation: any
+
+        let validationRules: ValidationRules
 
         if (type === 0) {
-            validation = validateForm(
-                {
-                    name: isBlankString,
-                    roundsNumber: positiveNumber,
-                    winnersCount: positiveNumber,
-                    maxPoints: positiveNumber
-                },
-                this.state,
-                true
-            )
+            validationRules = {
+                name: notBlankString,
+                roundsNumber: combineValidator(
+                    positiveNumber,
+                    lessThan(100, () => this.setState({ showRoundsNumberTooltip: true }))
+                ),
+                winnersCount: combineValidator(
+                    positiveNumber,
+                    lessThan(100, () => this.setState({ showWinnersCountTooltip: true}))
+                ),
+                maxPoints: combineValidator(
+                    positiveNumber,
+                    lessThan(100, () => this.setState({ showMaxPointsCountTooltip: true }))
+                )
+            }
         }
         else {
-            validation = validateForm(
-                {
-                    name: isBlankString,
-                    maxPoints: positiveNumber
-                },
-                this.state,
-                true
-            )
+            validationRules = {
+                name: notBlankString,
+                maxPoints: combineValidator(
+                    positiveNumber,
+                    lessThan(100, () => this.setState({ showMaxPointsCountTooltip: true }))
+                )
+            }
         }
 
-        this.setState(validation)
+        let inputWithError = validateFormByOne(validationRules, this.state)
 
-        if (isFormValidationOk(validation)) {
+        if (!inputWithError) {
             onSave({
                 name,
                 type: this.typeToStr(type),
@@ -275,14 +348,19 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
             return
         }
 
-        setTimeout(() => {
-            this.setState({
-                nameErr: false,
-                roundsNumberErr: false,
-                winnersCountErr: false,
-                maxPointsErr: false
-            })
+        this.setState({
+            [inputWithError + 'Err']: true
+        } as any)
+
+        this[inputWithError + 'Ref'].current.focus()
+
+        this.errorTimeout = global.setTimeout(() => {
+            this.setState(NO_ERRORS_STATE)
         }, 500)
+
+        this.tooltipsTimeout = global.setTimeout(() => {
+            this.setState(CLOSED_TOOLTIPS_STATE)
+        }, 1000)
     }
 
     private typeToStr(type: GameType): string {
@@ -302,12 +380,11 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
             maxPoints
         } = this.state
 
-
         return (
-            !isBlankString(name) ||
-            !isBlankString(roundsNumber) ||
-            !isBlankString(winnersCount) ||
-            !isBlankString(maxPoints)
+            notBlankString(name) ||
+            notBlankString(roundsNumber) ||
+            notBlankString(winnersCount) ||
+            notBlankString(maxPoints)
         )
     }
 }

@@ -6,7 +6,9 @@ import TextField from "../../../uikit/components/input/textField/TextField";
 import Block from "../../../uikit/components/block/Block";
 import Button from "../../../uikit/components/input/button/Button";
 import XButton from "../../../uikit/components/xButton/XButton";
-import {isBlankString} from "../../../utils/FormValidation";
+import {notBlankString} from "../../../utils/FormValidation";
+import Timer = NodeJS.Timer;
+import {CreateRef} from "../../../utils/React";
 
 interface PlayersCreationPopupProps {
     minCount: number
@@ -16,17 +18,28 @@ interface PlayersCreationPopupProps {
 
 interface PlayersCreationPopupState {
     players: string[]
-    errors: boolean[]
+    refs: any[]
+
+    errorIndex: number|null
 }
 
 export default class PlayersCreationPopup extends React.Component<PlayersCreationPopupProps, PlayersCreationPopupState> {
+    private errorTimeout: Timer
+
+    private modalRef = CreateRef()
+
     constructor(props) {
         super(props)
 
         this.state = {
             players: new Array(props.minCount).fill(''),
-            errors: new Array(props.minCount).fill(false)
+            refs: new Array(props.minCount).fill(0).map(CreateRef),
+            errorIndex: null
         }
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.errorTimeout)
     }
 
     render() {
@@ -68,6 +81,7 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
 
                     }
                     width={500}
+                    modalRef={this.modalRef}
                 />
             </div>
         )
@@ -76,7 +90,8 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
     private renderPlayers() {
         let {
             players,
-            errors
+            errorIndex,
+            refs
         } = this.state
 
         return players.map((player, index) => {
@@ -89,7 +104,8 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
                                 this.onPlayerNameText(name, index)
                             }}
                             placeholder="Имя участника"
-                            error={errors[index]}
+                            error={index === errorIndex}
+                            inputRef={refs[index]}
                         />
                         {this.renderRemoveButton(index)}
 
@@ -138,24 +154,24 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
     private add = () => {
         let {
             players,
-            errors
+            refs
         } = this.state
 
         this.setState({
             players: [...players, ''],
-            errors: [...errors, false]
+            refs: [...refs, CreateRef()]
         })
     }
 
     private remove = index => {
         let {
             players,
-            errors
+            refs
         } = this.state
 
         this.setState({
             players: players.filter((v, i) => i !== index),
-            errors: errors.filter((v, i) => i !== index)
+            refs: refs.filter((v, i) => i !== index)
         })
     }
 
@@ -169,33 +185,61 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
         } = this.props
 
         let validationOk = true
-        let errors: boolean[] = []
+
+        let i = 0
 
         for (let player of players) {
-            let validation = isBlankString(player)
-            errors.push(validationOk ? validation : false)
+            let validation = !notBlankString(player)
+
+            if (validation && validationOk) {
+                let input = this.state.refs[i].current
+
+                this.scrollTo(
+                    this.modalRef.current,
+                    input.offsetTop,
+                    100,
+                    () => {
+                        input.focus()
+                    }
+                )
+
+                this.setState({ errorIndex: i })
+            }
 
             if (validation)
                 validationOk = false
-        }
 
-        this.setState({ errors })
+            i++
+        }
 
         if (validationOk) {
             onSave(players)
             return
         }
 
-        setTimeout(() => {
-            this.setState({ errors: [] })
+        this.errorTimeout = global.setTimeout(() => {
+            this.setState({ errorIndex: null })
         }, 500)
     }
 
-    private haveAnyData(): boolean {
-        let {
-            players
-        } = this.state
+    private scrollTo(element: HTMLElement, to: number, duration: number, cb?: () => void) {
+        if (duration <= 0) {
+            cb && cb()
+            return
+        }
 
-        return !!players.find(pl => !isBlankString(pl))
+        let difference = to - element.scrollTop
+        let perTick = difference / duration * 10
+
+        setTimeout(() => {
+            element.scrollTop = element.scrollTop + perTick
+
+            if (element.scrollTop == to) {
+                cb && cb()
+                return
+            }
+
+            this.scrollTo(element, to, duration - 10, cb)
+        }, 10)
     }
 }

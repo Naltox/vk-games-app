@@ -8,6 +8,7 @@ interface ButtonProps {
     placeholder?: string
     error?: boolean
     height?: number
+    inputRef?: any
 }
 
 export default class TextField extends React.Component<ButtonProps, {}> {
@@ -17,7 +18,8 @@ export default class TextField extends React.Component<ButtonProps, {}> {
             onChange,
             placeholder,
             error,
-            height
+            height,
+            inputRef
         } = this.props
 
 
@@ -31,6 +33,7 @@ export default class TextField extends React.Component<ButtonProps, {}> {
                 value={value}
                 placeholder={placeholder || ''}
                 onChange={e => onChange(e.target.value)}
+                ref={inputRef}
             />
         )
     }

@@ -9,6 +9,7 @@ interface PopupBoxProps {
     bottom?: ReactNode
     width?: number
     closeFromOutside?: boolean
+    modalRef?: any
 
     onClose()
 }
@@ -38,12 +39,13 @@ export default class PopupBox extends React.Component<PopupBoxProps, PopupBoxSta
             bottom,
             width,
             closeFromOutside,
+            modalRef,
 
             onClose
         } = this.props
 
         return (
-            <div className={style.QuoteCreationModal}>
+            <div className={style.QuoteCreationModal} ref={modalRef}>
                 <div className={style.Back} onClick={() => closeFromOutside ? onClose() : ''}/>
                     <div className={style.Modal} style={{ width: width || 456}}>
                         <div className={style.Head}>

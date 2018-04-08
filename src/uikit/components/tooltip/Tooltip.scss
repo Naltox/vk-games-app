@@ -1,0 +1,37 @@
+.Tooltip {
+  padding: 10px 15px 10px 15px;
+  border-radius: 8px;
+  background-color: #60a4f0;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 13px;
+  line-height: 1.38;
+  text-align: left;
+  color: #ffffff;
+
+  transition: all .3s;
+  max-width: 270px;
+  z-index: 1000;
+  white-space: pre-wrap;
+  text-align: left;
+  box-sizing: border-box;
+  //top: 0px;
+  margin-top: -40px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 18px;
+    height: 9px;
+    width: 20px;
+    background-image: url('./arrow.svg');
+  }
+
+  &_active {
+    visibility: visible;
+    opacity: 1;
+  }
+}
