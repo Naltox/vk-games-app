@@ -3,11 +3,8 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {ActionCreators} from "../../actionCreators/ActionCreators";
 import {hot} from "react-hot-loader";
-import Block from "../../uikit/components/block/Block";
-import Flex from "../../uikit/components/flex/Flex";
 import Title from "../../uikit/components/title/Title";
 import Button from "../../uikit/components/input/button/Button";
-import MarginV from "../../uikit/components/marginV/MarginV";
 import ProgressBar from "../../uikit/components/progressBar/ProgressBar";
 import SurvivalGame from "../../domain/entity/SurvivalGame";
 import Loader from "../../uikit/components/loader/Loader";
@@ -20,8 +17,8 @@ import SurvivalGameNode from "../../domain/entity/SurvivalGameNode";
 import TabBar from "../../uikit/components/tabBar/TabBar";
 import {PlayersList} from "../../components/playersList/PlayersList";
 import GamePlayer from "../../domain/entity/GamePlayer";
-import TextView from "../../uikit/components/textView/TextView";
 import {BlockWithPlayers} from "../../components/survivalGame/blockWithPlayers/BlockWithPlayers";
+const style = require('./SurvivalGameDashboard.scss')
 
 interface SurvivalGameDashboardStateProps {
     dashboardGameId: string
@@ -104,26 +101,20 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
 
         if (data.length === 0) {
             return (
-                <Block wh100={true} padding="50px 50px 50px 50px">
+                <div className={style.ContentWrap}>
                     {this.renderSetup()}
-                </Block>
+                </div>
             )
         }
 
         if (this.isDone()) {
             return (
-                <Block wh100={true} padding="50px 50px 50px 50px">
+                <div className={style.ContentWrap}>
                     {this.renderHead()}
-                    <MarginV m={20}/>
                     <TabBar
                         tabs={[
                             this.renderWinner(),
-                            <div>
-                                <MarginV m={15}/>
-                                <Block height="calc(100vh - 200px)" overflow="scroll">
-                                    {this.renderTree()}
-                                </Block>
-                            </div>,
+                            this.renderTableTab(),
                             this.renderPlayers(),
                         ]}
                         tabsOptions={[
@@ -136,22 +127,16 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
                     />
 
                     {this.renderScorePopup()}
-                </Block>
+                </div>
             )
         }
 
         return (
-            <Block wh100={true} padding="50px 50px 50px 50px">
+            <div className={style.ContentWrap}>
                 {this.renderHead()}
-                <MarginV m={20}/>
                 <TabBar
                     tabs={[
-                        <div>
-                            <MarginV m={15}/>
-                            <Block height="calc(100vh - 200px)" overflow="scroll">
-                                {this.renderTree()}
-                            </Block>
-                        </div>,
+                        this.renderTableTab(),
                         this.renderPlayers(),
                     ]}
                     tabsOptions={[
@@ -163,7 +148,15 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
                 />
 
                 {this.renderScorePopup()}
-            </Block>
+            </div>
+        )
+    }
+
+    private renderTableTab() {
+        return (
+            <div className={style.TableTab}>
+                {this.renderTree()}
+            </div>
         )
     }
 
@@ -201,37 +194,32 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
 
         return (
             <div>
-                <Block>
-                    <Flex align="center" justify="space-between">
-                        <Block width={200}>
-                            <Title text={`Игра: "${game.name}"`}/>
-                        </Block>
-                        {this.isDone() ? <Title text="Завершена"/> : <div/>}
-                        <Block width={200}>
-                            <Block float="right">
-                                <Button
-                                    text="Назад"
-                                    onClick={this.back}
-                                />
-                            </Block>
-                        </Block>
-                    </Flex>
-                </Block>
+                <div className={style.HeaderTopWrap}>
+                    <div className={style.Item}>
+                        <Title text={`Игра: "${game.name}"`}/>
+                    </div>
+                    <div className={style.Item}>
+                        <div className={style.BackButton}>
+                            <Button
+                                text="Назад"
+                                onClick={this.back}
+                            />
+                        </div>
+                    </div>
+                </div>
 
-                <MarginV m={15}/>
-
-                <Block height="calc(100vh - 150px)" overflow="scroll">
+                <div className={style.SetupTreeWrap}>
                     {this.renderTree()}
-                </Block>
+                </div>
 
                 {
                     data.length == 0 ? (
-                        <Block float="right">
+                        <div className={style.StartGame}>
                             <Button
                                 text="Начать игру"
                                 onClick={() => this.start()}
                             />
-                        </Block>
+                        </div>
                     ) : <div/>
                 }
             </div>
@@ -252,12 +240,7 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
             players.push(new GamePlayer('', 0, node.secondPlayer, 0))
         })
 
-        return (
-            <Block>
-                <MarginV m={10}/>
-                <PlayersList players={players}/>
-            </Block>
-        )
+        return <PlayersList players={players}/>
     }
 
     private renderHead() {
@@ -266,34 +249,31 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
         } = this.props
 
         return (
-            <Block>
-                <Flex align="center" justify="space-between">
-                    <Block width={200}>
+            <div className={style.Head}>
+                <div className={style.HeaderTopWrap}>
+                    <div className={style.Item}>
                         <Title text={`Игра: "${game.name}"`}/>
-                    </Block>
+                    </div>
                     {this.isDone() ? <Title text="Завершена"/> : <div/>}
-                    <Block width={200}>
-                        <Block float="right">
+                    <div className={style.Item}>
+                        <div className={style.BackButton}>
                             <Button
                                 text="Назад"
                                 onClick={this.back}
                             />
-                        </Block>
-                    </Block>
-                </Flex>
+                        </div>
+                    </div>
+                </div>
 
                 {this.isDone() ? <div/> : (
-                    <Flex justify="center">
-                        <Block width={300}>
-                            <Flex align="center" direction="column">
-                                <Title text={'тур: ' + this.getRoundNum() + ' / ' + this.totalStagesNum()}/>
-                                <MarginV m={7}/>
-                                <ProgressBar progress={this.getRoundNum() / this.totalStagesNum() * 100}/>
-                            </Flex>
-                        </Block>
-                    </Flex>
+                    <div className={style.ProgressWrap}>
+                        <Title text={'тур: ' + this.getRoundNum() + ' / ' + this.totalStagesNum()}/>
+                        <div className={style.ProgressBar}>
+                            <ProgressBar progress={this.getRoundNum() / this.totalStagesNum() * 100}/>
+                        </div>
+                    </div>
                 )}
-            </Block>
+            </div>
         )
     }
 
@@ -383,19 +363,6 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
         if (!blockInfo)
             return <BlockEmpty/>
 
-        // return (
-        //     <div onClick={() => this.onBlockClick(blockInfo!)}>
-        //         <TreeBlock>
-        //             <MarginV m={13}/>
-        //             <Title text={blockInfo.firstPlayer + ' ' + blockInfo.firstPlayerScore}/>
-        //             <VS/>
-        //             <MarginV m={13}/>
-        //             <Title text={blockInfo.secondPlayer + ' ' + blockInfo.secondPlayerScore}/>
-        //         </TreeBlock>
-        //     </div>
-        // )
-
-        console.log(123)
         return (
             <BlockWithPlayers
                 data={blockInfo}
@@ -463,7 +430,7 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
             let f = players[`${i}_${0}`] || ''
             let s = players[`${i}_${1}`] || ''
 
-            if (notBlankString(f) || notBlankString(s))
+            if (!notBlankString(f) || !notBlankString(s))
                 return false
         }
 
@@ -583,12 +550,9 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
 
     private renderWinner() {
         return (
-            <Block>
-                <MarginV m={35}/>
-                <TextView fontSize={125} align="center" nowrap={true}>
-                    🥇 {this.getWinner()}
-                </TextView>
-            </Block>
+            <div className={style.WinnerWrap}>
+                🥇 {this.getWinner()}
+            </div>
         )
     }
 }

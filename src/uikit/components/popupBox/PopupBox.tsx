@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {ReactNode} from "react";
-import {ErrorPopup} from "../../../components/errorPopup/ErrorPopup";
 const style = require('./PopupBox.scss')
 
 interface PopupBoxProps {
@@ -45,7 +44,7 @@ export default class PopupBox extends React.Component<PopupBoxProps, PopupBoxSta
         } = this.props
 
         return (
-            <div className={style.QuoteCreationModal} ref={modalRef}>
+            <div className={style.PopupBox} ref={modalRef}>
                 <div className={style.Back} onClick={() => closeFromOutside ? onClose() : ''}/>
                     <div className={style.Modal} style={{ width: width || 456}}>
                         <div className={style.Head}>

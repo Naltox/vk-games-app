@@ -5,7 +5,6 @@ import {ActionCreators} from "../../actionCreators/ActionCreators";
 import Loader from "../../uikit/components/loader/Loader";
 import {hot} from "react-hot-loader";
 
-
 interface RootContainerStateProps {
     currentScreen: string
 }

@@ -1,14 +1,14 @@
 import * as React from "react";
 import {TreeBlock} from "../block/TreeBlock";
-import MarginV from "../../../uikit/components/marginV/MarginV";
 import {VS} from "../vs/VS";
+const style = require('./BlockEmpty.scss')
 
 export const BlockEmpty: React.SFC = props => {
     return (
         <TreeBlock>
-            <MarginV m={25}/>
-            <VS/>
-            <MarginV m={25}/>
+            <div className={style.ContentWrap}>
+                <VS/>
+            </div>
         </TreeBlock>
     )
 }

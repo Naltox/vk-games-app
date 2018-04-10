@@ -2,7 +2,7 @@ import * as React from "react";
 import {TreeBlock} from "../block/TreeBlock";
 import SurvivalGameNode from "../../../domain/entity/SurvivalGameNode";
 import TextView from "../../../uikit/components/textView/TextView";
-import MarginV from "../../../uikit/components/marginV/MarginV";
+const style = require('./BlockWithPlayers.scss')
 
 interface BlockWithPlayersProps {
     data: SurvivalGameNode
@@ -18,21 +18,23 @@ export class BlockWithPlayers extends React.PureComponent<BlockWithPlayersProps,
 
 
         return (
-            <div onClick={() => onClick()}>
-                <TreeBlock >
-                    <MarginV m={5}/>
-                    <TextView align="center" nowrap={true}>
-                        {data.firstPlayer}
-                    </TextView>
-                    <MarginV m={4}/>
-                    <TextView align="center" nowrap={true}>
+            <div className={style.Block} onClick={() => onClick()}>
+                <TreeBlock>
+                    <div className={style.TopWrap}>
+                        {/*<TextView align="center" nowrap={true}>*/}
+                            {data.firstPlayer}
+                        {/*</TextView>*/}
+                    </div>
+                    <div className={this.isScoreSet() ? '' : style.Edit}>
+                        {/*<TextView align="center" nowrap={true}>*/}
                         {this.isScoreSet() ? `${data.firstPlayerScore} : ${data.secondPlayerScore}` : '✏️'}
-                    </TextView>
-                    <MarginV m={4}/>
-                    <TextView align="center" nowrap={true}>
-                        {data.secondPlayer}
-                    </TextView>
-                    <MarginV m={5}/>
+                        {/*</TextView>*/}
+                    </div>
+                    <div className={style.BottomWrap}>
+                        {/*<TextView align="center" nowrap={true}>*/}
+                            {data.secondPlayer}
+                        {/*</TextView>*/}
+                    </div>
                 </TreeBlock>
             </div>
         )

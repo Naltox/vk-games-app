@@ -3,9 +3,18 @@
   height: 100%;
   box-sizing: border-box;
   padding: 50px 50px 0px 50px;
+}
 
-  .List {
-    height: calc(100% - 71px);
-    overflow: scroll;
-  }
+.Head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e7e8ec;
+  margin-bottom: 20px;
+}
+
+.List {
+  height: calc(100% - 71px);
+  overflow: scroll;
 }

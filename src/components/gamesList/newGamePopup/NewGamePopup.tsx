@@ -1,10 +1,7 @@
 import * as React from 'react'
 import PopupBox from "../../../uikit/components/popupBox/PopupBox";
-import Flex from "../../../uikit/components/flex/Flex";
 import Title from "../../../uikit/components/title/Title";
-import MarginV from "../../../uikit/components/marginV/MarginV";
 import TextField from "../../../uikit/components/input/textField/TextField";
-import Block from "../../../uikit/components/block/Block";
 import Button from "../../../uikit/components/input/button/Button";
 import RadioInput from "../../../uikit/components/input/radioInput/RadioInput";
 import HelpButton from "../../../uikit/components/helpButton/HelpButton";
@@ -16,6 +13,7 @@ import DropDown from "../../../uikit/components/input/dropDown/DropDown";
 import Timer = NodeJS.Timer;
 import {CreateRef} from "../../../utils/React";
 import Tooltip from "../../../uikit/components/tooltip/Tooltip";
+const style = require('./NewGamePopup.scss')
 
 export enum GameType {
     ForPoints,
@@ -70,7 +68,6 @@ const NO_ERRORS_STATE = {
     maxPointsErr: false,
 }
 
-
 export default class NewGamePopup extends React.Component<NewGamePopupProps, NewGamePopupState> {
     private errorTimeout: Timer
     private tooltipsTimeout: Timer
@@ -113,6 +110,27 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
     render() {
         let {
             onClose,
+        } = this.props
+
+        let {
+        } = this.state
+
+        return (
+            <div>
+                <PopupBox
+                    title="Новая игра"
+                    onClose={onClose}
+                    closeFromOutside={!this.haveAnyData()}
+                    body={this.renderFormBody()}
+                    bottom={this.renderModalBottom()}
+                    width={500}
+                />
+            </div>
+        )
+    }
+
+    private renderFormBody() {
+        let {
             onHelp
         } = this.props
 
@@ -125,60 +143,54 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
 
         return (
             <div>
-                <PopupBox
-                    title="Новая игра"
-                    onClose={onClose}
-                    closeFromOutside={!this.haveAnyData()}
-                    body={
-                        <Flex direction="column">
-                            <Title text="Название игры"/>
+                <div className={style.InputBlock}>
+                    <Title text="Название игры"/>
 
-                            <MarginV m={15}/>
-                            <TextField
-                                value={name}
-                                onChange={name => {
-                                    this.setState({ name })
-                                }}
-                                placeholder="Название игры"
-                                error={nameErr}
-                                inputRef={this.nameRef}
-                            />
+                    <div className={style.InputWrap}>
+                        <TextField
+                            value={name}
+                            onChange={name => {
+                                this.setState({ name })
+                            }}
+                            placeholder="Название игры"
+                            error={nameErr}
+                            inputRef={this.nameRef}
+                        />
+                    </div>
+                </div>
 
-                            <MarginV m={20}/>
+                <div className={style.InputBlock}>
+                    <div className={style.GameTypeLine}>
+                        <Title text="Тип игры"/>
+                        <HelpButton onClick={onHelp}/>
+                    </div>
+                    <div className={style.InputWrap}>
+                        <RadioInput
+                            titles={[
+                                'На очки',
+                                'Последний герой',
+                            ]}
+                            selected={type}
+                            onChange={type => {
+                                this.setState({ type })}
+                            }
+                        />
+                    </div>
+                </div>
 
-                            <Flex>
-                                <Title text="Тип игры"/>
-                                <HelpButton onClick={onHelp}/>
-                            </Flex>
-                            <MarginV m={15}/>
-                            <RadioInput
-                                titles={[
-                                    'На очки',
-                                    'Последний герой',
-                                ]}
-                                selected={type}
-                                onChange={type => {
-                                    this.setState({ type })}
-                                }
-                            />
+                {type == 0 ? this.renderPointsGameInputs() : this.renderSurvivalGameInputs()}
 
-                            <MarginV m={20}/>
+            </div>
+        )
+    }
 
-                            {type == 0 ? this.renderPointsGameInputs() : this.renderSurvivalGameInputs()}
-
-                        </Flex>
-                    }
-                    bottom={
-                        <Block float="right">
-                            <Button
-                                text="Дальше"
-                                minWidth={100}
-                                onClick={this.onSave}
-                            />
-                        </Block>
-
-                    }
-                    width={500}
+    private renderModalBottom() {
+        return (
+            <div className={style.NextButtonWrap}>
+                <Button
+                    text="Дальше"
+                    minWidth={100}
+                    onClick={this.onSave}
                 />
             </div>
         )
@@ -201,48 +213,53 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
 
         return (
             <div>
-                <Tooltip show={showRoundsNumberTooltip}>
-                    Количество раундов не может быть больше ста
-                </Tooltip>
-                <Title text="Количество раундов"/>
-                <MarginV m={15}/>
-                <TextField
-                    value={roundsNumber}
-                    onChange={roundsNumber => this.setState({ roundsNumber })}
-                    placeholder="Количество раундов"
-                    error={roundsNumberErr}
-                    inputRef={this.roundsNumberRef}
-                />
+                <div className={style.InputBlock}>
+                    <Tooltip show={showRoundsNumberTooltip}>
+                        Количество раундов не может быть больше ста
+                    </Tooltip>
+                    <Title text="Количество раундов"/>
+                    <div className={style.InputWrap}>
+                        <TextField
+                            value={roundsNumber}
+                            onChange={roundsNumber => this.setState({ roundsNumber })}
+                            placeholder="Количество раундов"
+                            error={roundsNumberErr}
+                            inputRef={this.roundsNumberRef}
+                        />
+                    </div>
+                </div>
 
-                <MarginV m={20}/>
+                <div className={style.InputBlock}>
+                    <Tooltip show={showWinnersCountTooltip}>
+                        Количество призовых мест не может быть больше ста
+                    </Tooltip>
+                    <Title text="Количество призовых мест"/>
+                    <div className={style.InputWrap}>
+                        <TextField
+                            value={winnersCount}
+                            onChange={winnersCount => this.setState({ winnersCount })}
+                            placeholder="Количество призовых мест"
+                            error={winnersCountErr}
+                            inputRef={this.winnersCountRef}
+                        />
+                    </div>
+                </div>
 
-                <Tooltip show={showWinnersCountTooltip}>
-                    Количество призовых мест не может быть больше ста
-                </Tooltip>
-                <Title text="Количество призовых мест"/>
-                <MarginV m={15}/>
-                <TextField
-                    value={winnersCount}
-                    onChange={winnersCount => this.setState({ winnersCount })}
-                    placeholder="Количество призовых мест"
-                    error={winnersCountErr}
-                    inputRef={this.winnersCountRef}
-                />
-
-                <MarginV m={20}/>
-
-                <Tooltip show={showMaxPointsCountTooltip}>
-                    Максимальный балл не может быть больше ста
-                </Tooltip>
-                <Title text="Максимальный балл"/>
-                <MarginV m={15}/>
-                <TextField
-                    value={maxPoints}
-                    onChange={maxPoints => this.setState({ maxPoints })}
-                    placeholder="Максимальный балл"
-                    error={maxPointsErr}
-                    inputRef={this.maxPointsRef}
-                />
+                <div className={style.InputBlock}>
+                    <Tooltip show={showMaxPointsCountTooltip}>
+                        Максимальный балл не может быть больше ста
+                    </Tooltip>
+                    <Title text="Максимальный балл"/>
+                    <div className={style.InputWrap}>
+                        <TextField
+                            value={maxPoints}
+                            onChange={maxPoints => this.setState({ maxPoints })}
+                            placeholder="Максимальный балл"
+                            error={maxPointsErr}
+                            inputRef={this.maxPointsRef}
+                        />
+                    </div>
+                </div>
             </div>
         )
     }
@@ -259,32 +276,36 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
 
         return (
             <div>
-                <Title text="Количество участников"/>
-                <MarginV m={15}/>
-                <DropDown
-                    items={PLAYERS_COUNT}
-                    placeholder="Количество участников"
-                    width={450}
-                    showUp={false}
-                    error={false}
-                    selectedIndex={playersCount}
-                    onSelect={(playersCount) => this.setState({ playersCount })}
-                />
+                <div className={style.InputBlock}>
+                    <Title text="Количество участников"/>
+                    <div className={style.InputWrap}>
+                        <DropDown
+                            items={PLAYERS_COUNT}
+                            placeholder="Количество участников"
+                            width={450}
+                            showUp={false}
+                            error={false}
+                            selectedIndex={playersCount}
+                            onSelect={(playersCount) => this.setState({ playersCount })}
+                        />
+                    </div>
+                </div>
 
-                <MarginV m={20}/>
-
-                <Tooltip show={showMaxPointsCountTooltip}>
-                    Максимальный балл не может быть больше ста
-                </Tooltip>
-                <Title text="Максимальный балл"/>
-                <MarginV m={15}/>
-                <TextField
-                    value={maxPoints}
-                    onChange={maxPoints => this.setState({ maxPoints })}
-                    placeholder="Максимальный балл"
-                    error={maxPointsErr}
-                    inputRef={this.maxPointsRef}
-                />
+                <div className={style.InputBlock}>
+                    <Tooltip show={showMaxPointsCountTooltip}>
+                        Максимальный балл не может быть больше ста
+                    </Tooltip>
+                    <Title text="Максимальный балл"/>
+                    <div className={style.InputWrap}>
+                        <TextField
+                            value={maxPoints}
+                            onChange={maxPoints => this.setState({ maxPoints })}
+                            placeholder="Максимальный балл"
+                            error={maxPointsErr}
+                            inputRef={this.maxPointsRef}
+                        />
+                    </div>
+                </div>
             </div>
         )
     }

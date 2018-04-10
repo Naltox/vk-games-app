@@ -16,7 +16,7 @@ export default class TabBar extends React.Component<TabBarProps, {}> {
         } = this.props
 
         return (
-            <div className={style.TabBar}>
+            <div>
                 <div className={style.Head}>
                     <div className={style.Left}>
                         {this.renderLeftSideTabs()}
@@ -43,7 +43,7 @@ export default class TabBar extends React.Component<TabBarProps, {}> {
 
             let isActive = currentTab == i
 
-            let className = style.TabName + ' ' + (isActive == true ? style.TabNameActive : '')
+            let className = style.TabName + ' ' + (isActive == true ? style.TabName_active : '')
 
             return (
                 <div
@@ -83,7 +83,7 @@ export default class TabBar extends React.Component<TabBarProps, {}> {
 
             return (
                 <div
-                    className={style.TabName + ' ' + (isActive == true ? style.TabNameActive : '')}
+                    className={style.TabName + ' ' + (isActive == true ? style.TabName_active : '')}
                     key={`right${i}`}
                     onClick={() => {
                         onChange(i)

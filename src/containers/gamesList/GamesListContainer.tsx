@@ -4,19 +4,15 @@ import {ActionCreators} from "../../actionCreators/ActionCreators";
 import {bindActionCreators} from "redux";
 import BaseGame from "../../domain/entity/BaseGame";
 import {NewGameInfo, default as NewGamePopup} from "../../components/gamesList/newGamePopup/NewGamePopup";
-import Block from "../../uikit/components/block/Block";
 import {NoGames} from "../../components/gamesList/noGames/NoGames";
 import PlayersCreationPopup from "../../components/gamesList/playersCreationPopup/PlayersCreationPopup";
 import {GameTypesPopup} from "../../components/gamesList/gameTypesPopup/GameTypesPopup";
 import Loader from "../../uikit/components/loader/Loader";
 import Title from "../../uikit/components/title/Title";
-import Flex from "../../uikit/components/flex/Flex";
 import Button, {ButtonType} from "../../uikit/components/input/button/Button";
-import {SeparatorLine} from "../../uikit/components/separatorLine/SeparatorLine";
-import MarginV from "../../uikit/components/marginV/MarginV";
-import XButton from "../../uikit/components/xButton/XButton";
 import GameForPoints from "../../domain/entity/GameForPoints";
 import SurvivalGame from "../../domain/entity/SurvivalGame";
+import {GamesList} from "../../components/gamesList/gamesList/GamesList";
 const style = require('./GamesList.scss')
 
 interface GamesListContainerProps {
@@ -60,7 +56,6 @@ class GamesListContainer extends React.Component<GamesListContainerProps & Games
     render() {
         let {
             games,
-            openPointsGameDashboard
         } = this.props
 
 
@@ -70,42 +65,27 @@ class GamesListContainer extends React.Component<GamesListContainerProps & Games
 
         if (games.length === 0)
             return (
-                <Block padding={10}>
+                <div>
                     <NoGames onCreateGame={this.openNewGamePopup}/>
                     {this.renderModals()}
-                </Block>
+                </div>
             )
 
         return (
             <div className={style.GamesList}>
-                <Flex justify="space-between" align="center">
+                <div className={style.Head}>
                     <Title text="Игры"/>
                     <Button
                         text="Добавить игру"
                         onClick={this.openNewGamePopup}
                         type={ButtonType.Primary}
                     />
-                </Flex>
-                <MarginV m={20}/>
-                <SeparatorLine/>
-                <MarginV m={20}/>
-                <div className={style.List}>
-                    {games.map((game, index) => {
-                        return (
-                            <Block key={index} onClick={() => this.openGameDashboard(game)}>
-                                <Block padding={10}>
-                                    <Flex justify="space-between">
-                                        <Title text={game.name}/>
-                                        <XButton onClick={() => {
-                                            this.deleteGame(game.id)
-                                        }}/>
-                                    </Flex>
-                                </Block>
-                                <MarginV m={20}/>
-                            </Block>
-                        )
-                    })}
                 </div>
+                <GamesList
+                    games={games}
+                    onDelete={id => this.deleteGame(id)}
+                    onOpen={game => this.openGameDashboard(game)}
+                />
                 {this.renderModals()}
             </div>
         )

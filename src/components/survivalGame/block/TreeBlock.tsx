@@ -4,7 +4,7 @@ const style = require('./TreeBlock.scss')
 export class TreeBlock extends React.Component<{}, {}> {
     render() {
         return (
-            <div className={style.TreeBlock} style={{ width: 140 }}>
+            <div className={style.TreeBlock}>
                 {this.props.children}
             </div>
         )

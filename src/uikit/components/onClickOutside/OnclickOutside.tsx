@@ -46,10 +46,6 @@ export default class OnclickOutside extends React.Component<ClickOnclickOutside,
         const { onClick } = this.props
         const el = this.container
 
-
-        console.log(e)
-
-
         if (!el.contains(e.target)) onClick(e)
     }
 }

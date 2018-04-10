@@ -14,6 +14,7 @@ export default class ScoreSelector extends React.Component<ScoreSelectorProps, {
             selectedScore,
             onChange
         } = this.props
+
         return (
             <div className={style.ScoreSelector}>
                 {this.generateScores().map((score, index) => {

@@ -1,11 +1,9 @@
 import * as React from 'react'
 import PopupBox from "../../../uikit/components/popupBox/PopupBox";
-import Flex from "../../../uikit/components/flex/Flex";
-import Block from "../../../uikit/components/block/Block";
 import Button from "../../../uikit/components/input/button/Button";
 import Title from "../../../uikit/components/title/Title";
 import ScoreSelector from "../../pointsGame/scoreSelector/ScoreSelector";
-import MarginV from "../../../uikit/components/marginV/MarginV";
+const style = require('./ScorePopup.scss')
 
 interface ScorePopupProps {
     firstPlayer: string
@@ -54,35 +52,34 @@ export class ScorePopup extends React.Component<ScorePopupProps, ScorePopupState
                 onClose={onClose}
                 closeFromOutside={true}
                 body={
-                    <Block>
+                    <div>
                         <Title text={firstPlayer + ':'}/>
-                        <Flex justify="center">
+                        <div className={style.ScoreSelectorWrap}>
                             <ScoreSelector
                                 maxScore={maxScore}
                                 selectedScore={firstPlayerScore}
                                 onChange={firstPlayerScore => this.setState({ firstPlayerScore })}
                             />
-                        </Flex>
+                        </div>
 
-                        <MarginV m={25}/>
                         <Title text={secondPlayer + ':'}/>
-                        <Flex justify="center">
+                        <div className={style.ScoreSelectorWrap}>
                             <ScoreSelector
                                 maxScore={maxScore}
                                 selectedScore={secondPlayerScore}
                                 onChange={secondPlayerScore => this.setState({ secondPlayerScore })}
                             />
-                        </Flex>
-                    </Block>
+                        </div>
+                    </div>
                 }
                 bottom={
-                    <Block float="right">
+                    <div className={style.SaveButtonWrap}>
                         <Button
                             text="Сохранить"
                             minWidth={100}
                             onClick={() => onSave(firstPlayerScore, secondPlayerScore)}
                         />
-                    </Block>
+                    </div>
                 }
             />
         )

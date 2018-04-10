@@ -30,7 +30,6 @@ tr th:last-child {
 }
 
 table {
-  //background-color: #e7e9ec;
   border-spacing: 0px;
 }
 
@@ -50,7 +49,6 @@ thead {
     background-color: #eff3f7;
     padding: 0px 10px;
     box-sizing: border-box;
-    //display: table-cell;
     vertical-align: middle;
     font-size: 13.5px;
     font-weight: normal;
@@ -59,8 +57,6 @@ thead {
     line-height: normal;
     letter-spacing: 0.1px;
     color: #2b2f33;
-
-
 
     .Content {
       display: flex;

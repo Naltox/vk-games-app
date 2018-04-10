@@ -41,6 +41,7 @@
   &--primary {
     background: #5181b8;
     color: #FFFFFF;
+
     &:hover {
       background: #5b88bd;
     }
@@ -52,6 +53,7 @@
   &--light {
     background: #e5ebf1;
     color: #55677d;
+
     &:hover {
       background: #D3DCE6;
     }
@@ -61,6 +63,7 @@
     padding: 10px 23px;
     background: #5181b8;
     color: #FFFFFF;
+
     &:hover {
       background: #6888AD;
     }
@@ -73,6 +76,7 @@
     padding: 10px 23px;
     background: #dfe6ed;
     color: #55677d;
+
     &:hover {
       background: #D3DCE6;
     }
@@ -94,7 +98,6 @@
 
   &--disabled {
     opacity: 0.6;
-
   }
 
   &--100 {

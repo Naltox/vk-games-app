@@ -3,18 +3,13 @@
   background-color: #f1f1f1!important;
   border-radius: 16px;
   height: 7px;
-  //transition: all .5s;
+}
 
-  .innerWrap {
-
-  }
-
-  .inner {
-    background-color: #5181b8!important;
-    height: 7px;
-    border-radius: 16px;
-    animation: ProgressAnimation .5s;
-  }
+.inner {
+  background-color: #5181b8!important;
+  height: 7px;
+  border-radius: 16px;
+  animation: ProgressAnimation .5s;
 }
 
 @keyframes ProgressAnimation {

@@ -1,0 +1,63 @@
+.ContentWrap {
+  padding: 50px 50px 50px 50px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+.Head {
+  margin-bottom: 20px;
+}
+
+.HeaderTopWrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.HeaderTopWrap .Item {
+  width: 200px;
+}
+
+.HeaderTopWrap .BackButton {
+  float: right;
+}
+
+.ProgressWrap {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.ProgressBar {
+  margin-top: 7px;
+  width: 100%;
+}
+
+.WinnerWrap {
+  margin-top: 35px;
+  text-align: center;
+  font-size: 125px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.TableTab {
+  overflow: scroll;
+  box-sizing: border-box;
+  padding: 0px 0px 15px 0px;
+  height: calc(100vh - 200px);
+}
+
+.SetupTreeWrap {
+  height: calc(100vh - 150px);
+  overflow: scroll;
+  margin-top: 15px;
+}
+
+.StartGame {
+  float: right;
+}

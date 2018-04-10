@@ -1,9 +1,7 @@
 import * as React from "react";
-import Block from "../../../uikit/components/block/Block";
-import MarginV from "../../../uikit/components/marginV/MarginV";
-import Flex from "../../../uikit/components/flex/Flex";
 import BigTitle from "../../../uikit/components/bigTitle/BigTitle";
 import GamePlayer from "../../../domain/entity/GamePlayer";
+const style = require('./ResultsBoard.scss')
 
 interface ResultsBoardProps {
     players: GamePlayer[],
@@ -17,20 +15,17 @@ export class ResultsBoard extends React.Component<ResultsBoardProps, {}> {
         } = this.props
 
         return(
-            <Block padding={25} height="calc(100vh - 200px)" overflow="scroll">
-                <Flex justify="center" direction="column">
-                    {winners.map((w, index) => {
-                        return (
-                            <Block key={index}>
-                                <BigTitle
-                                    text={`${this.textForPosition(index + 1)} - ` + this.renderWinnersName(w)}
-                                />
-                                <MarginV m={10}/>
-                            </Block>
-                        )
-                    })}
-                </Flex>
-            </Block>
+            <div className={style.ResultsBoard}>
+                {winners.map((w, index) => {
+                    return (
+                        <div key={index} className={style.Result}>
+                            <BigTitle
+                                text={`${this.textForPosition(index + 1)} - ` + this.renderWinnersName(w)}
+                            />
+                        </div>
+                    )
+                })}
+            </div>
         )
     }
 

@@ -1,16 +1,5 @@
 .TextField {
   width: 100%;
-  //border-radius: 0;
-  //border-width: 0 0 0 0;
-  //color: #2B2F33;
-  //background: #FFFFFF;
-  //font-size: 13px;
-  //letter-spacing: 0.3px;
-  //line-height: 17px; //32px;
-  //outline: 0;
-  //padding: 5px 0;
-  //margin: 0;
-
   transition: all .2s;
 
   background: #FFFFFF;
@@ -28,15 +17,8 @@
     border: 1px solid #b7bec6;
   }
 
-  //font-size: 19px;
-  //letter-spacing: 0.14px;
-  //line-height: 21px;// 47px;
-  //padding-top: 13px;
-  //padding-bottom: 13px;
-
   height: 42px;
   box-sizing: border-box;
-
 
   &::-webkit-input-placeholder {
     color:#808080;

@@ -1,13 +1,10 @@
 import * as React from "react";
-import Block from "../../../uikit/components/block/Block";
-import MarginV from "../../../uikit/components/marginV/MarginV";
 import Title from "../../../uikit/components/title/Title";
-import Flex from "../../../uikit/components/flex/Flex";
 import ScoreSelector from "../scoreSelector/ScoreSelector";
-import {SeparatorLine} from "../../../uikit/components/separatorLine/SeparatorLine";
 import Button from "../../../uikit/components/input/button/Button";
 import GamePlayer from "../../../domain/entity/GamePlayer";
 import GameForPoints from "../../../domain/entity/GameForPoints";
+const style = require('./RoundScore.scss')
 
 interface RoundScoreProps {
     game: GameForPoints
@@ -32,40 +29,34 @@ export class RoundScore extends React.Component<RoundScoreProps, {}> {
         } = this.props
 
         return (
-            <Block wh100={true}>
-                <MarginV m={20}/>
-                <Title text={`Раунд ${roundNumber}, очки:`}/>
-                <MarginV m={20}/>
+            <div className={style.RoundWrap}>
+                <div className={style.RoundTitle}>
+                    <Title text={`Раунд ${roundNumber}, очки:`}/>
+                </div>
 
-                <div style={{height: 'calc(100vh - 313px)', overflow: 'scroll'}}>
+                <div className={style.ScoreList}>
                     {players.map((player, index) => {
                         return (
-                            <Block key={index}>
-                                <Flex justify="space-between" align="center">
-                                    <Block width={200} flexShrink={0}>
-                                        <Title text={player.name}/>
-                                    </Block>
-                                    <ScoreSelector
-                                        maxScore={game.maxPoints}
-                                        selectedScore={score[player.id] || 0}
-                                        onChange={score => onScoreChange(player.id, score)}
-                                    />
-                                </Flex>
-                                <SeparatorLine/>
-                            </Block>
+                            <div key={index} className={style.ScoreLine}>
+                                <div className={style.PlayerName}>
+                                    <Title text={player.name}/>
+                                </div>
+                                <ScoreSelector
+                                    maxScore={game.maxPoints}
+                                    selectedScore={score[player.id] || 0}
+                                    onChange={score => onScoreChange(player.id, score)}
+                                />
+                            </div>
                         )
                     })}
                 </div>
-
-                <MarginV m={20}/>
-
-                <Block float="right">
+                <div className={style.NextRoundButton}>
                     <Button
                         text="Следующий раунд"
                         onClick={onSaveScore}
                     />
-                </Block>
-            </Block>
+                </div>
+            </div>
         )
     }
 }

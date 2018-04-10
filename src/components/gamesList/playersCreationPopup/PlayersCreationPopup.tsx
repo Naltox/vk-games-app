@@ -1,14 +1,12 @@
 import * as React from 'react'
 import PopupBox from "../../../uikit/components/popupBox/PopupBox";
-import Flex from "../../../uikit/components/flex/Flex";
-import MarginV from "../../../uikit/components/marginV/MarginV";
 import TextField from "../../../uikit/components/input/textField/TextField";
-import Block from "../../../uikit/components/block/Block";
 import Button from "../../../uikit/components/input/button/Button";
 import XButton from "../../../uikit/components/xButton/XButton";
 import {notBlankString} from "../../../utils/FormValidation";
 import Timer = NodeJS.Timer;
 import {CreateRef} from "../../../utils/React";
+const style = require('./PlayersCreationPopup.scss')
 
 interface PlayersCreationPopupProps {
     minCount: number
@@ -58,26 +56,23 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
                     onClose={onClose}
                     closeFromOutside={false}
                     body={
-                        <Flex direction="column">
+                        <div>
                             {this.renderPlayers()}
-                            <Block>
-                                <Block float="right">
-                                    <a onClick={this.add}>
-                                        Добавить
-                                    </a>
-                                </Block>
-                            </Block>
-
-                        </Flex>
+                            <div className={style.FloatRight}>
+                                <a onClick={this.add}>
+                                    Добавить
+                                </a>
+                            </div>
+                        </div>
                     }
                     bottom={
-                        <Block float="right">
+                        <div className={style.FloatRight}>
                             <Button
                                 text="Дальше"
                                 minWidth={100}
                                 onClick={this.onSave}
                             />
-                        </Block>
+                        </div>
 
                     }
                     width={500}
@@ -96,21 +91,17 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
 
         return players.map((player, index) => {
             return (
-                <div key={index}>
-                    <Flex align="center">
-                        <TextField
-                            value={player}
-                            onChange={name => {
-                                this.onPlayerNameText(name, index)
-                            }}
-                            placeholder="Имя участника"
-                            error={index === errorIndex}
-                            inputRef={refs[index]}
-                        />
-                        {this.renderRemoveButton(index)}
-
-                    </Flex>
-                    <MarginV m={15}/>
+                <div className={style.PlayerWrap} key={index}>
+                    <TextField
+                        value={player}
+                        onChange={name => {
+                            this.onPlayerNameText(name, index)
+                        }}
+                        placeholder="Имя участника"
+                        error={index === errorIndex}
+                        inputRef={refs[index]}
+                    />
+                    {this.renderRemoveButton(index)}
                 </div>
             )
         })
@@ -127,13 +118,13 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
 
         if (players.length > minCount)
             return (
-                <Block padding="10px 0px 10px 10px">
+                <div className={style.RemoveButtonWrap}>
                     <XButton
                         onClick={() => {
                             this.remove(index)
                         }}
                     />
-                </Block>
+                </div>
             )
 
         return <div/>

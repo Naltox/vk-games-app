@@ -4,10 +4,7 @@ import {bindActionCreators} from "redux";
 import {ActionCreators} from "../../actionCreators/ActionCreators";
 import Title from "../../uikit/components/title/Title";
 import Button from "../../uikit/components/input/button/Button";
-import Block from "../../uikit/components/block/Block";
 import Loader from "../../uikit/components/loader/Loader";
-import Flex from "../../uikit/components/flex/Flex";
-import MarginV from "../../uikit/components/marginV/MarginV";
 import GamePlayer from "../../domain/entity/GamePlayer";
 import TabBar from "../../uikit/components/tabBar/TabBar";
 import {PlayersList} from "../../components/playersList/PlayersList";
@@ -21,6 +18,7 @@ import {TableHeadItem} from "../../uikit/components/table/TableHeadItem";
 import {TableLine} from "../../uikit/components/table/TableLine";
 import {TableCell} from "../../uikit/components/table/TableCell";
 import {PointsGameTableItem} from "../../actionCreators/PointsGameDashboardAC";
+const style = require('./GameForPointsDashboard.scss')
 
 interface GameForPointsDashboardStateProps {
     dashboardGameId: string
@@ -103,24 +101,19 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
 
         if (!this.isDone())
             return (
-                <Block wh100={true} padding="50px 50px 50px 50px">
+                <div className={style.Wrap}>
                     {this.renderHead()}
                     <TabBar
                         tabs={[
                             this.renderCurrentRound(),
-
-                            <Block overflow="scroll" padding="0px 0px 15px 0px" height="calc(100vh - 200px)">
+                            <div className={style.TableTab}>
                                 <Table
                                     head={this.renderTableHead()}
-
                                     body={this.renderTableBody()}
                                 />
-                            </Block>,
-
+                            </div>,
 
                             this.renderPlayers(),
-
-
                         ]}
                         tabsOptions={[
                             { name: 'Текущий раунд', side: 'left' },
@@ -130,26 +123,26 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
                         currentTab={currentTab}
                         onChange={this.onTabChange}
                     />
-                </Block>
+                </div>
             )
 
         return (
-            <Block wh100={true} padding="50px 50px 50px 50px">
-                {this.renderHead()}
-                <MarginV m={20}/>
+            <div className={style.Wrap}>
+                <div className={style.GameDoneHeader}>
+                    {this.renderHead()}
+                </div>
                 <TabBar
                     tabs={[
                         <ResultsBoard
                             winners={this.getWinners()}
                             players={this.props.players}
                         />,
-                        <Block overflow="scroll" padding="0px 0px 15px 0px" height="calc(100vh - 200px)">
+                        <div className={style.TableTab}>
                             <Table
                                 head={this.renderTableHead()}
-
                                 body={this.renderTableBody()}
                             />
-                        </Block>,
+                        </div>,
                         this.renderPlayers(),
                     ]}
                     tabsOptions={[
@@ -160,10 +153,8 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
                     currentTab={currentTab}
                     onChange={this.onTabChange}
                 />
-            </Block>
+            </div>
         )
-
-
     }
 
     private renderHead() {
@@ -172,14 +163,14 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
         } = this.props
 
         return (
-            <Block>
-                <Flex align="center" justify="space-between">
-                    <Block width={200}>
+            <>
+                <div className={style.HeaderTopWrap}>
+                    <div className={style.Item}>
                         <Title text={`Игра: "${game.name}"`}/>
-                    </Block>
+                    </div>
                     {this.isDone() ? <Title text="Завершена"/> : <div/>}
-                    <Block width={200}>
-                        <Block float="right">
+                    <div className={style.Item}>
+                        <div className={style.BackButton}>
                             <Button
                                 text="Назад"
                                 onClick={() => {
@@ -187,22 +178,19 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
                                     this.props.openGamesScreen()
                                 }}
                             />
-                        </Block>
-                    </Block>
-                </Flex>
+                        </div>
+                    </div>
+                </div>
 
                 {this.isDone() ? <div/> : (
-                    <Flex justify="center">
-                        <Block width={300}>
-                            <Flex align="center" direction="column">
-                                <Title text={'раунд: ' + this.getRoundNum() + ' / ' + game.roundsNumber}/>
-                                <MarginV m={7}/>
-                                <ProgressBar progress={this.getRoundNum() / game.roundsNumber * 100}/>
-                            </Flex>
-                        </Block>
-                    </Flex>
+                    <div className={style.ProgressWrap}>
+                        <Title text={'раунд: ' + this.getRoundNum() + ' / ' + game.roundsNumber}/>
+                        <div className={style.ProgressBar}>
+                            <ProgressBar progress={this.getRoundNum() / game.roundsNumber * 100}/>
+                        </div>
+                    </div>
                 )}
-            </Block>
+            </>
         )
     }
 
@@ -235,12 +223,7 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
             players
         } = this.props
 
-        return (
-            <Block>
-                <MarginV m={10}/>
-                <PlayersList players={players}/>
-            </Block>
-        )
+        return <PlayersList players={players}/>
     }
 
     private getRoundNum() {
@@ -391,8 +374,6 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
                     )
                 }
             }
-
-            console.log('\n')
 
             rows.push(<TableLine key={`line_${lineIndex}`}>{row}</TableLine>)
             lineIndex++

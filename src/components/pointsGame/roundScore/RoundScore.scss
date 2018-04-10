@@ -1,0 +1,32 @@
+.RoundWrap {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+.RoundTitle {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.ScoreList {
+  height: calc(100vh - 313px);
+  overflow: scroll;
+  margin-bottom: 20px;
+}
+
+.NextRoundButton {
+  float: right;
+}
+
+.ScoreLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e7e8ec;
+}
+
+.PlayerName {
+  flex-shrink: 0;
+  width: 200px;
+}
