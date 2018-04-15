@@ -392,7 +392,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
 
         this.tooltipsTimeout = global.setTimeout(() => {
             this.setState(CLOSED_TOOLTIPS_STATE)
-        }, 1000)
+        }, 1500)
     }
 
     private typeToStr(type: GameType): string {
