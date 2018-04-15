@@ -102,9 +102,20 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
 
     }
 
+    private keyUpListener = event => {
+        if (event.keyCode == 13)
+            this.onSave()
+    }
+
     componentWillUnmount() {
         clearTimeout(this.errorTimeout)
         clearTimeout(this.tooltipsTimeout)
+
+        document.removeEventListener('keyup', this.keyUpListener)
+    }
+
+    componentDidMount() {
+        document.addEventListener('keyup', this.keyUpListener)
     }
 
     render() {

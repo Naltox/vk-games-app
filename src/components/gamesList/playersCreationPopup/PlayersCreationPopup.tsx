@@ -36,8 +36,19 @@ export default class PlayersCreationPopup extends React.Component<PlayersCreatio
         }
     }
 
+    private keyUpListener = event => {
+        if (event.keyCode == 13)
+            this.onSave()
+    }
+
     componentWillUnmount() {
         clearTimeout(this.errorTimeout)
+
+        document.removeEventListener('keyup', this.keyUpListener)
+    }
+
+    componentDidMount() {
+        document.addEventListener('keyup', this.keyUpListener)
     }
 
     render() {
