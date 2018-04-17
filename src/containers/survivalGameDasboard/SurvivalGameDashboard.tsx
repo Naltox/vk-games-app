@@ -284,14 +284,16 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
         } = this.props
 
         return (
-            <TreeView
-                blockWidth={140}
-                blockHeight={79}
-                firstLineItemsCount={game.playersCount / 2}
-                block={this.renderBlock}
-                blocksOffset={25}
-                linesOffset={70}
-            />
+            <div className={style.TreeWrap}>
+                <TreeView
+                    blockWidth={140}
+                    blockHeight={79}
+                    firstLineItemsCount={game.playersCount / 2}
+                    block={this.renderBlock}
+                    blocksOffset={25}
+                    linesOffset={70}
+                />
+            </div>
         )
     }
 

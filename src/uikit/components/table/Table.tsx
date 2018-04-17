@@ -10,7 +10,7 @@ interface TableProps {
 export default class Table extends React.Component<TableProps, {}> {
     render() {
         return (
-            <Block>
+            <div>
                 <table className={style.Table}>
                     <thead>
                         <tr>
@@ -22,7 +22,7 @@ export default class Table extends React.Component<TableProps, {}> {
                         {this.props.body}
                     </tbody>
                 </table>
-            </Block>
+            </div>
         )
     }
 }

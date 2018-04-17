@@ -1,7 +1,6 @@
 import * as React from "react";
 import {TreeBlock} from "../block/TreeBlock";
 import SurvivalGameNode from "../../../domain/entity/SurvivalGameNode";
-import TextView from "../../../uikit/components/textView/TextView";
 const style = require('./BlockWithPlayers.scss')
 
 interface BlockWithPlayersProps {
@@ -21,19 +20,13 @@ export class BlockWithPlayers extends React.PureComponent<BlockWithPlayersProps,
             <div className={style.Block} onClick={() => onClick()}>
                 <TreeBlock>
                     <div className={style.TopWrap}>
-                        {/*<TextView align="center" nowrap={true}>*/}
-                            {data.firstPlayer}
-                        {/*</TextView>*/}
+                        {data.firstPlayer}
                     </div>
                     <div className={this.isScoreSet() ? '' : style.Edit}>
-                        {/*<TextView align="center" nowrap={true}>*/}
                         {this.isScoreSet() ? `${data.firstPlayerScore} : ${data.secondPlayerScore}` : '✏️'}
-                        {/*</TextView>*/}
                     </div>
                     <div className={style.BottomWrap}>
-                        {/*<TextView align="center" nowrap={true}>*/}
-                            {data.secondPlayer}
-                        {/*</TextView>*/}
+                        {data.secondPlayer}
                     </div>
                 </TreeBlock>
             </div>

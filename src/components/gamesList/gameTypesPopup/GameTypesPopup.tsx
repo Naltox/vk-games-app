@@ -1,9 +1,8 @@
 import * as React from 'react'
 import Title from "../../../uikit/components/title/Title";
-import MarginV from "../../../uikit/components/marginV/MarginV";
 import WhitePopupBox from "../../../uikit/components/whitePopupBox/WhitePopupBox";
 import BigTitle from "../../../uikit/components/bigTitle/BigTitle";
-import TextView from "../../../uikit/components/textView/TextView";
+const style = require('./GameTypesPopup.scss')
 
 interface GameTypesPopupProps {
     onClose()
@@ -17,11 +16,12 @@ export const GameTypesPopup: React.SFC<GameTypesPopupProps> = props => {
             onClose={props.onClose}
         >
             <BigTitle text="Типы игр"/>
-            <MarginV m={15}/>
-            <Title text="Последний герой"/>
-            <MarginV m={10}/>
 
-            <TextView>
+            <div className={style.SubTitle}>
+                <Title text="Последний герой"/>
+            </div>
+
+            <div className={style.TextBlock}>
                 В этом команды или игроки распределяются на пары (из этого следует, что их должно быть четное количество).
                 <br/>
                 <br/>
@@ -29,13 +29,13 @@ export const GameTypesPopup: React.SFC<GameTypesPopupProps> = props => {
                 <br/>
                 <br/>
                 Игру длится до тех пор, пока не останется один игрок или команда.
-            </TextView>
+            </div>
 
-            <MarginV m={20}/>
+            <div className={style.SubTitle}>
+                <Title text="На очки"/>
+            </div>
 
-            <Title text="На очки"/>
-            <MarginV m={10}/>
-            <TextView>
+            <div className={style.TextBlock}>
                 Каждый игрок или команда соревнуются в каком-то виде деятельности указанное число раундов.
                 <br/>
                 <br/>
@@ -43,7 +43,7 @@ export const GameTypesPopup: React.SFC<GameTypesPopupProps> = props => {
                 <br/>
                 <br/>
                 Таким образом, отсортировав результаты по убыванию мы получим N победителей.
-            </TextView>
+            </div>
 
         </WhitePopupBox>
     )
