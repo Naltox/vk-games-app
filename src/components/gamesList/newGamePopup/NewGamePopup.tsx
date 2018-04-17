@@ -163,7 +163,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                             onChange={name => {
                                 this.setState({ name })
                             }}
-                            placeholder="Название игры"
+                            placeholder=""
                             error={nameErr}
                             inputRef={this.nameRef}
                         />
@@ -233,7 +233,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                         <TextField
                             value={roundsNumber}
                             onChange={roundsNumber => this.setState({ roundsNumber })}
-                            placeholder="Количество раундов"
+                            placeholder=""
                             error={roundsNumberErr}
                             inputRef={this.roundsNumberRef}
                         />
@@ -249,7 +249,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                         <TextField
                             value={winnersCount}
                             onChange={winnersCount => this.setState({ winnersCount })}
-                            placeholder="Количество призовых мест"
+                            placeholder=""
                             error={winnersCountErr}
                             inputRef={this.winnersCountRef}
                         />
@@ -265,7 +265,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                         <TextField
                             value={maxPoints}
                             onChange={maxPoints => this.setState({ maxPoints })}
-                            placeholder="Максимальный балл"
+                            placeholder=""
                             error={maxPointsErr}
                             inputRef={this.maxPointsRef}
                         />
@@ -292,7 +292,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                     <div className={style.InputWrap}>
                         <DropDown
                             items={PLAYERS_COUNT}
-                            placeholder="Количество участников"
+                            placeholder=""
                             width={450}
                             showUp={false}
                             error={false}
@@ -311,7 +311,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
                         <TextField
                             value={maxPoints}
                             onChange={maxPoints => this.setState({ maxPoints })}
-                            placeholder="Максимальный балл"
+                            placeholder=""
                             error={maxPointsErr}
                             inputRef={this.maxPointsRef}
                         />
