@@ -9,15 +9,9 @@ interface NoGamesProps {
 
 export const NoGames: React.SFC<NoGamesProps> = props => {
     return (
-        <div>
+        <div className={style.NoGamesWrap}>
+            <div className={style.SadFace}>☹️</div>
             <Title text="Пока нет созданных игр"/>
-            <div className={style.CreateGame}>
-                <Button
-                    text="Создать игру"
-                    type={ButtonType.BigPrimary}
-                    onClick={props.onCreateGame}
-                />
-            </div>
         </div>
     )
 }

@@ -63,14 +63,6 @@ class GamesListContainer extends React.Component<GamesListContainerProps & Games
             return <Loader/>
         }
 
-        if (games.length === 0)
-            return (
-                <div>
-                    <NoGames onCreateGame={this.openNewGamePopup}/>
-                    {this.renderModals()}
-                </div>
-            )
-
         return (
             <div className={style.GamesList}>
                 <div className={style.Head}>
@@ -81,13 +73,27 @@ class GamesListContainer extends React.Component<GamesListContainerProps & Games
                         type={ButtonType.Primary}
                     />
                 </div>
-                <GamesList
-                    games={games}
-                    onDelete={id => this.deleteGame(id)}
-                    onOpen={game => this.openGameDashboard(game)}
-                />
+                {this.renderGamesList()}
                 {this.renderModals()}
             </div>
+        )
+    }
+
+    private renderGamesList() {
+        let {
+            games
+        } = this.props
+
+        if (games!.length === 0) {
+            return <NoGames onCreateGame={this.openNewGamePopup}/>
+        }
+
+        return (
+            <GamesList
+                games={games!}
+                onDelete={id => this.deleteGame(id)}
+                onOpen={game => this.openGameDashboard(game)}
+            />
         )
     }
 
