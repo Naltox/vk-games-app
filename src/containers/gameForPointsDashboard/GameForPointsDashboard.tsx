@@ -163,34 +163,37 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
         } = this.props
 
         return (
-            <>
+            <div className={style.Header}>
                 <div className={style.HeaderTopWrap}>
                     <div className={style.Item}>
-                        <Title text={`Игра: "${game.name}"`}/>
+                        <div className={style.Title}>
+                            {`Игра: "${game.name}"`}
+                        </div>
                     </div>
-                    {this.isDone() ? <Title text="Завершена"/> : <div/>}
+                    {
+                        this.isDone() ? <Title text="Завершена"/> :
+                        <div className={style.ProgressWrap}>
+                            <Title text={'раунд: ' + this.getRoundNum() + ' / ' + game.roundsNumber}/>
+                            <div className={style.ProgressBar}>
+                                <ProgressBar progress={this.getRoundNum() / game.roundsNumber * 100}/>
+                            </div>
+                        </div>
+                    }
                     <div className={style.Item}>
                         <div className={style.BackButton}>
-                            <Button
-                                text="Назад"
+                            <a
+                                className={style.BackButton}
                                 onClick={() => {
                                     this.props.resetDashboard()
                                     this.props.openGamesScreen()
                                 }}
-                            />
+                            >
+                                Назад к списку игр
+                            </a>
                         </div>
                     </div>
                 </div>
-
-                {this.isDone() ? <div/> : (
-                    <div className={style.ProgressWrap}>
-                        <Title text={'раунд: ' + this.getRoundNum() + ' / ' + game.roundsNumber}/>
-                        <div className={style.ProgressBar}>
-                            <ProgressBar progress={this.getRoundNum() / game.roundsNumber * 100}/>
-                        </div>
-                    </div>
-                )}
-            </>
+            </div>
         )
     }
 
@@ -206,15 +209,17 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
         } = this.state
 
         return (
-            <RoundScore
-                game={game}
-                players={players}
-                roundNumber={this.getRoundNum()}
-                score={score}
+            <div className={style.RoundWrap}>
+                <RoundScore
+                    game={game}
+                    players={players}
+                    roundNumber={this.getRoundNum()}
+                    score={score}
 
-                onSaveScore={this.saveScore}
-                onScoreChange={this.scoreChange}
-            />
+                    onSaveScore={this.saveScore}
+                    onScoreChange={this.scoreChange}
+                />
+            </div>
         )
     }
 
@@ -223,7 +228,11 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
             players
         } = this.props
 
-        return <PlayersList players={players}/>
+        return (
+            <div className={style.PlayersTab}>
+                <PlayersList players={players}/>
+            </div>
+        )
     }
 
     private getRoundNum() {
@@ -370,7 +379,9 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
             if (row.length < game.roundsNumber + 1) {
                 for (let i = row.length; i <= game.roundsNumber; i++) {
                     row.push(
-                        <TableCell key={`cell_${i}`}>-</TableCell>
+                        <TableCell key={`cell_${i}`}>
+                            <div className={style.TableNoData}>–</div>
+                        </TableCell>
                     )
                 }
             }
@@ -393,7 +404,7 @@ class GameForPointsDashboard extends React.Component<GameForPointsDashboardDispa
         for (let i = 0; i < game.roundsNumber; i++) {
             roundNames.push(
                 <TableHeadItem key={`head_${i + 1}`}>
-                    {`Раунд - ${i + 1}`}
+                    {`Раунд ${i + 1}`}
                 </TableHeadItem>
             )
         }

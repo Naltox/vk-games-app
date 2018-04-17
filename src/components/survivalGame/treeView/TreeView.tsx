@@ -132,7 +132,7 @@ export default class TreeView extends React.Component<TreeViewProps, {}> {
                             y1={s.y + blockHeight / 2}
                             x2={s.x}
                             y2={s.y + blockHeight / 2}
-                            style={{ stroke: '#2A5885', strokeWidth: '2'}}
+                            style={{ stroke: '#60a4f0', strokeWidth: '2'}}
                         />
                     )
                 }
@@ -144,7 +144,7 @@ export default class TreeView extends React.Component<TreeViewProps, {}> {
                         y1={f.y + blockHeight / 2}
                         x2={s.x - 40}
                         y2={s.y + blockHeight / 2}
-                        style={{ stroke: '#2A5885', strokeWidth: '2'}}
+                        style={{ stroke: '#60a4f0', strokeWidth: '2'}}
                     />
                 )
             }

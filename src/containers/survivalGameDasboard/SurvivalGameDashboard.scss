@@ -1,5 +1,4 @@
 .ContentWrap {
-  padding: 50px 50px 50px 50px;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -7,11 +6,14 @@
 
 .Head {
   margin-bottom: 20px;
+  background-color: #f3f4f5;
 }
 
 .HeaderTopWrap {
+  padding: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .HeaderTopWrap .Item {
@@ -28,7 +30,6 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  margin-bottom: 10px;
 }
 
 .ProgressBar {
@@ -37,9 +38,7 @@
 }
 
 .WinnerWrap {
-  margin-top: 35px;
-  text-align: center;
-  font-size: 125px;
+  padding: 20px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -48,20 +47,37 @@
 .TableTab {
   overflow: scroll;
   box-sizing: border-box;
-  padding: 0px 0px 15px 0px;
+  padding: 0px 20px 20px 20px;
   height: calc(100vh - 200px);
+}
+
+.PlayersTab {
+  padding: 20px;
+  height: calc(100vh - 170px);
+  overflow: scroll;
 }
 
 .SetupTreeWrap {
   height: calc(100vh - 150px);
   overflow: scroll;
   margin-top: 15px;
+  padding: 0px 20px 20px 20px;
 }
 
 .StartGame {
   float: right;
+  margin-right: 20px;
 }
 
 .TreeWrap {
   margin-top: 15px;
+}
+
+.Title {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 300;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

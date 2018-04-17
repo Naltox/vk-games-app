@@ -22,7 +22,7 @@ export class BlockWithPlayers extends React.PureComponent<BlockWithPlayersProps,
                     <div className={style.TopWrap}>
                         {data.firstPlayer}
                     </div>
-                    <div className={this.isScoreSet() ? '' : style.Edit}>
+                    <div className={this.isScoreSet() ? style.Score : style.Edit}>
                         {this.isScoreSet() ? `${data.firstPlayerScore} : ${data.secondPlayerScore}` : '✏️'}
                     </div>
                     <div className={style.BottomWrap}>

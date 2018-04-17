@@ -1,21 +1,32 @@
 .Wrap {
   width: 100%;
   height: 100%;
-
-  padding: 50px 50px 50px 50px;
   box-sizing: border-box;
 }
 
 .TableTab {
   overflow: scroll;
   box-sizing: border-box;
-  padding: 0px 0px 15px 0px;
-  height: calc(100vh - 200px);
+  padding: 20px;
+  height: calc(100vh - 170px);
+}
+
+.PlayersTab {
+  padding: 20px;
+  height: calc(100vh - 170px);
+  overflow: scroll;
+}
+
+.Header {
+  padding: 20px;
+  background-color: #f3f4f5;
+  margin-bottom: 20px;
 }
 
 .HeaderTopWrap {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .HeaderTopWrap .Item {
@@ -32,7 +43,6 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  margin-bottom: 10px;
 }
 
 .ProgressBar {
@@ -42,4 +52,21 @@
 
 .GameDoneHeader {
   margin-bottom: 20px;
+}
+
+.Title {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 300;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.RoundWrap {
+  padding: 0px 20px 20px 20px;
+}
+
+.TableNoData {
+  text-align: center;
 }

@@ -18,6 +18,7 @@ import TabBar from "../../uikit/components/tabBar/TabBar";
 import {PlayersList} from "../../components/playersList/PlayersList";
 import GamePlayer from "../../domain/entity/GamePlayer";
 import {BlockWithPlayers} from "../../components/survivalGame/blockWithPlayers/BlockWithPlayers";
+import BigTitle from "../../uikit/components/bigTitle/BigTitle";
 const style = require('./SurvivalGameDashboard.scss')
 
 interface SurvivalGameDashboardStateProps {
@@ -196,15 +197,14 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
             <div>
                 <div className={style.HeaderTopWrap}>
                     <div className={style.Item}>
-                        <Title text={`Игра: "${game.name}"`}/>
+                        <div className={style.Title}>
+                            {`Игра: "${game.name}"`}
+                        </div>
                     </div>
                     <div className={style.Item}>
-                        <div className={style.BackButton}>
-                            <Button
-                                text="Назад"
-                                onClick={this.back}
-                            />
-                        </div>
+                        <a className={style.BackButton} onClick={this.back}>
+                            Назад к списку игр
+                        </a>
                     </div>
                 </div>
 
@@ -240,7 +240,11 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
             players.push(new GamePlayer('', 0, node.secondPlayer, 0))
         })
 
-        return <PlayersList players={players}/>
+        return (
+            <div className={style.PlayersTab}>
+                <PlayersList players={players}/>
+            </div>
+        )
     }
 
     private renderHead() {
@@ -252,27 +256,27 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
             <div className={style.Head}>
                 <div className={style.HeaderTopWrap}>
                     <div className={style.Item}>
-                        <Title text={`Игра: "${game.name}"`}/>
+                        <div className={style.Title}>
+                            {`Игра: "${game.name}"`}
+                        </div>
                     </div>
-                    {this.isDone() ? <Title text="Завершена"/> : <div/>}
+                    {
+                        this.isDone() ? <Title text="Завершена"/> :
+                            <div className={style.ProgressWrap}>
+                                <Title text={'тур: ' + this.getRoundNum() + ' / ' + this.totalStagesNum()}/>
+                                <div className={style.ProgressBar}>
+                                    <ProgressBar progress={this.getRoundNum() / this.totalStagesNum() * 100}/>
+                                </div>
+                            </div>
+                    }
                     <div className={style.Item}>
                         <div className={style.BackButton}>
-                            <Button
-                                text="Назад"
-                                onClick={this.back}
-                            />
+                            <a className={style.BackButton} onClick={this.back}>
+                                Назад к списку игр
+                            </a>
                         </div>
                     </div>
                 </div>
-
-                {this.isDone() ? <div/> : (
-                    <div className={style.ProgressWrap}>
-                        <Title text={'тур: ' + this.getRoundNum() + ' / ' + this.totalStagesNum()}/>
-                        <div className={style.ProgressBar}>
-                            <ProgressBar progress={this.getRoundNum() / this.totalStagesNum() * 100}/>
-                        </div>
-                    </div>
-                )}
             </div>
         )
     }
@@ -551,9 +555,16 @@ class SurvivalGameDashboard extends React.Component<SurvivalGameDashboardDispatc
     }
 
     private renderWinner() {
+        // return (
+        //     <div className={style.WinnerWrap}>
+        //         🥇 {this.getWinner()}
+        //     </div>
+        // )
+
+
         return (
             <div className={style.WinnerWrap}>
-                🥇 {this.getWinner()}
+                <BigTitle text={`🥇 ${this.getWinner()}`}/>
             </div>
         )
     }

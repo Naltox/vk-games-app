@@ -8,7 +8,6 @@ import {NoGames} from "../../components/gamesList/noGames/NoGames";
 import PlayersCreationPopup from "../../components/gamesList/playersCreationPopup/PlayersCreationPopup";
 import {GameTypesPopup} from "../../components/gamesList/gameTypesPopup/GameTypesPopup";
 import Loader from "../../uikit/components/loader/Loader";
-import Title from "../../uikit/components/title/Title";
 import Button, {ButtonType} from "../../uikit/components/input/button/Button";
 import GameForPoints from "../../domain/entity/GameForPoints";
 import SurvivalGame from "../../domain/entity/SurvivalGame";
