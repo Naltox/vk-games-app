@@ -1,27 +1,26 @@
 import {reduce, Reducer} from "./Reducer";
-import LoadGame from "../actions/gamesList/LoadGame";
-import LoadPlayers from "../actions/game/LoadPlayers";
-import LoadScore from "../actions/pointsGame/LoadScore";
-import LoadTableData from "../actions/pointsGame/LoadTableData";
+import {LoadGameActID} from "../actions/GamesListActions";
+import {LoadScoreActID, LoadTableDataActID} from "../actions/PointsGameActions";
+import {LoadPlayersActID} from "../actions/GameActions";
 
 class PointsGameDashboardReducer extends Reducer {
-    @reduce(LoadGame, {})
+    @reduce(LoadGameActID, {})
     handleLoadGame(state, action) {
         return { ...state, game: action.game }
     }
 
 
-    @reduce(LoadPlayers, {})
+    @reduce(LoadPlayersActID, {})
     handleLoadPLayers(state, action) {
         return { ...state, players: action.players }
     }
 
-    @reduce(LoadScore, {})
+    @reduce(LoadScoreActID, {})
     handleLoadScore(state, action) {
         return { ...state, score: action.score }
     }
 
-    @reduce(LoadTableData, {})
+    @reduce(LoadTableDataActID, {})
     handleLoadTableData(state, action) {
         return { ...state, tableData: action.data }
     }

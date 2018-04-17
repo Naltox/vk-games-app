@@ -1,15 +1,14 @@
 import {reduce, Reducer} from "./Reducer";
-import LoadGame from "../actions/gamesList/LoadGame";
-import LoadSurvivalData from "../actions/survivalGame/LoadSurvivalData";
+import {LoadSurvivalDataActID} from "../actions/SurvivalGameActions";
+import {LoadGameActID} from "../actions/GamesListActions";
 
 class SurvivalGameDashboardReducer extends Reducer {
-    @reduce(LoadGame, {})
+    @reduce(LoadGameActID, {})
     handleLoadGame(state, action) {
         return { ...state, game: action.game }
     }
 
-
-    @reduce(LoadSurvivalData, {})
+    @reduce(LoadSurvivalDataActID, {})
     handleLoadSurvivalData(state, action) {
         return { ...state, data: action.data }
     }

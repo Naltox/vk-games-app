@@ -1,35 +1,36 @@
 import {reduce, Reducer} from "./Reducer";
-import LoadGames from "../actions/gamesList/LoadGames";
-import OpenScreenAction from "../actions/routing/OpenScreenAction";
-import OpenPointsGameDashboard from "../actions/routing/OpenPointsGameDashboard";
-import OpenSurvivalGameDashboard from "../actions/routing/OpenSurvivalGameDashboard";
+import {
+    OpenPointsGameDashboardActID, OpenScreenActID,
+    OpenSurvivalGameDashboardActID
+} from "../actions/RoutingActions";
+import {LoadGamesActID} from "../actions/GamesListActions";
 
 class RootReducer extends Reducer {
-    @reduce(OpenScreenAction, {})
+    @reduce(OpenScreenActID, {})
     handleOpenScreen(state, action) {
         return { ...state, currentScreen: action.screenId }
     }
 
 
-    @reduce(LoadGames, {})
+    @reduce(LoadGamesActID, {})
     handleLoadGames(state, action) {
         return { ...state, games: action.games }
     }
 
-    @reduce(OpenPointsGameDashboard, {})
-    handleOpenPointsGameDashboard(state, action) {
-        return {
-            ...state,
-            currentScreen: 'pointsGameDashboard',
-            dashboardGameId: action.gameId
-        }
-    }
-
-    @reduce(OpenSurvivalGameDashboard, {})
+    @reduce(OpenSurvivalGameDashboardActID, {})
     handleOpenSurvivalGameDashboard(state, action) {
         return {
             ...state,
             currentScreen: 'survivalGameDashboard',
+            dashboardGameId: action.gameId
+        }
+    }
+
+    @reduce(OpenPointsGameDashboardActID, {})
+    handleOpenPointsGameDashboard(state, action) {
+        return {
+            ...state,
+            currentScreen: 'pointsGameDashboard',
             dashboardGameId: action.gameId
         }
     }

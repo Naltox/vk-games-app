@@ -16,15 +16,14 @@ export class ActionCreator {
 
     }
 
-
     getCreators() {
         let creators = {}
-        let constructo: any = this.constructor
+        let constructor: any = this.constructor
 
-        if (!constructo.spawnersList)
+        if (!constructor.spawnersList)
             return []
 
-        constructo.spawnersList.forEach(i => {
+        constructor.spawnersList.forEach(i => {
             creators[i] = (...args) => {
                 let resp = this[i](...args)
 
@@ -34,11 +33,11 @@ export class ActionCreator {
                             .then(action => {
                                 if (action && Array.isArray(action) === true) {
                                     for (let act of action) {
-                                        dispatch(act.serialize())
+                                        dispatch(act)
                                     }
                                 }
                                 else if (action)
-                                    dispatch(action.serialize())
+                                    dispatch(action)
                             })
                             .catch(e => {
                                 // resending error to global handler
@@ -51,12 +50,12 @@ export class ActionCreator {
                 else if (typeof resp === 'function') {
                     return (dispatch, getState) => {
                         resp(action => {
-                            dispatch(action.serialize())
+                            dispatch(action)
                         }, getState)
                     }
                 }
                 else if (resp) {
-                    return resp.serialize()
+                    return resp
                 }
             }
         })

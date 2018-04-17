@@ -1,28 +1,20 @@
 export function reduce(action, defaultState) {
     return function (target, key, descriptor) {
-        const prototype = Reflect.getPrototypeOf(target)
         const constructor = target.constructor
 
         if (constructor.reducers)
-            constructor.reducers[action.prototype.constructor.name] = key
+            constructor.reducers[action] = key
         else {
             constructor.reducers = { }
-            constructor.reducers[action.prototype.constructor.name] = key
-        }
-
-        if (constructor.actions)
-            constructor.actions[action.prototype.constructor.name] = action.prototype.constructor
-        else {
-            constructor.actions = { }
-            constructor.actions[action.prototype.constructor.name] = action.prototype.constructor
+            constructor.reducers[action] = key
         }
 
         if (defaultState) {
             if (constructor.defaultState)
-                constructor.defaultState[action.prototype.constructor.name] = defaultState
+                constructor.defaultState[action] = defaultState
             else {
                 constructor.defaultState = { }
-                constructor.defaultState[action.prototype.constructor.name] = defaultState
+                constructor.defaultState[action] = defaultState
             }
         }
 
@@ -35,8 +27,7 @@ export class Reducer {
         let constructor: any = this.constructor
 
         if (constructor.reducers && constructor.reducers[action.type]) {
-            const deserializedAction = constructor.actions[action.type].deserialize(action)
-            return this[constructor.reducers[action.type]](state, deserializedAction)
+            return this[constructor.reducers[action.type]](state, action)
         }
         else {
             return state

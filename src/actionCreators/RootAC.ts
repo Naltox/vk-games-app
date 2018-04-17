@@ -1,10 +1,10 @@
 import {ActionCreator, creator} from "./ActionCreator";
 import {BaseGamesRepository} from "../domain/repository/BaseGamesRepository";
-import LoadGames from "../actions/gamesList/LoadGames";
 import {NewGameInfo} from "../components/gamesList/newGamePopup/NewGamePopup";
 import GameForPoints from "../domain/entity/GameForPoints";
 import {BasePlayersRepository} from "../domain/repository/BasePlayersRepository";
 import SurvivalGame from "../domain/entity/SurvivalGame";
+import {LoadGamesAct} from "../actions/GamesListActions";
 
 export default class RootAC extends ActionCreator {
     constructor(
@@ -18,7 +18,9 @@ export default class RootAC extends ActionCreator {
     async loadGames() {
         let games = await this.gamesRepository.getGames()
 
-        return new LoadGames(games)
+        //return new LoadGames(games)
+
+        return LoadGamesAct(games)
     }
 
     @creator

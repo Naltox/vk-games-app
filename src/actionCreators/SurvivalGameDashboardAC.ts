@@ -1,9 +1,9 @@
 import {ActionCreator, creator} from "./ActionCreator";
 import {BaseGamesRepository} from "../domain/repository/BaseGamesRepository";
-import LoadGame from "../actions/gamesList/LoadGame";
 import {BaseSurvivalGameRepository} from "../domain/repository/BaseSurvivalGameRepository";
-import LoadSurvivalData from "../actions/survivalGame/LoadSurvivalData";
 import SurvivalGameNode from "../domain/entity/SurvivalGameNode";
+import {LoadGameAct} from "../actions/GamesListActions";
+import {LoadSurvivalDataAct} from "../actions/SurvivalGameActions";
 
 export default class SurvivalGameDashboardAC extends ActionCreator {
     constructor(
@@ -16,8 +16,8 @@ export default class SurvivalGameDashboardAC extends ActionCreator {
     @creator
     async resetDashboard() {
         return [
-            new LoadGame(null),
-            new LoadSurvivalData(null)
+            LoadGameAct(null),
+            LoadSurvivalDataAct(null)
         ]
     }
 
@@ -25,14 +25,14 @@ export default class SurvivalGameDashboardAC extends ActionCreator {
     async loadGame(gameId: string) {
         let game = await this.gamesRepository.getGame(gameId)
 
-        return new LoadGame(game!)
+        return LoadGameAct(game!)
     }
 
     @creator
     async loadData(gameId: string) {
         let data = await this.survivalRepository.getData(gameId)
 
-        return new LoadSurvivalData(data)
+        return LoadSurvivalDataAct(data)
     }
 
     @creator

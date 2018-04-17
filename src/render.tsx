@@ -13,7 +13,6 @@ import GamesListContainer from "./containers/gamesList/GamesListContainer";
 import LocalPlayersRepository from "./infrastructure/repository/LocalPlayersRepository";
 import RouterAC from "./actionCreators/RouterAC";
 import RootContainer from "./containers/root/RootContainer";
-import Action from "./actions/Action";
 import GameForPointsDashboard from "./containers/gameForPointsDashboard/GameForPointsDashboard";
 import PointsGameDashboardAC from "./actionCreators/PointsGameDashboardAC";
 import LocalRoundsRepository from "./infrastructure/repository/LocalRoundsRepository";
@@ -28,8 +27,6 @@ const store = createStore(
     AppReducers,
     applyMiddleware(thunk)
 )
-
-const dispatch = (action: Action) => store.dispatch(action.serialize())
 
 let gamesRepository = new LocalGamesRepository()
 let playersRepository = new LocalPlayersRepository()
@@ -59,7 +56,7 @@ ActionCreators.survivalGameDashboard = new SurvivalGameDashboardAC(
 )
 
 
-dispatch(ActionCreators.routingAC.openGamesScreen())
+store.dispatch(ActionCreators.routingAC.openGamesScreen())
 
 render(
     <Provider store={store}>
