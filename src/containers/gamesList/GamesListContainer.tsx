@@ -74,7 +74,7 @@ class GamesListContainer extends React.Component<GamesListContainerProps & Games
         return (
             <div className={style.GamesList}>
                 <div className={style.Head}>
-                    <Title text="Игры"/>
+                    <div className={style.Title}>Игры</div>
                     <Button
                         text="Добавить игру"
                         onClick={this.openNewGamePopup}

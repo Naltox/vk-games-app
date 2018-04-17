@@ -25,7 +25,9 @@ export const GamesList: React.SFC<GamesListProps> = props => {
                 return (
                     <div className={style.Line} onClick={() => onOpen(game)} key={index}>
                         <Title text={game.name}/>
-                        <XButton onClick={() => onDelete(game.id)}/>
+                        <div className={style.DeleteButton}>
+                            <XButton onClick={() => onDelete(game.id)}/>
+                        </div>
                     </div>
                 )
             })}
