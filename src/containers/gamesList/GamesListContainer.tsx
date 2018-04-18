@@ -84,7 +84,7 @@ class GamesListContainer extends React.Component<GamesListContainerProps & Games
         } = this.props
 
         if (games!.length === 0) {
-            return <NoGames onCreateGame={this.openNewGamePopup}/>
+            return <NoGames/>
         }
 
         return (

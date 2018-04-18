@@ -116,6 +116,7 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
 
     componentDidMount() {
         document.addEventListener('keyup', this.keyUpListener)
+        this.nameRef.current.focus()
     }
 
     render() {
@@ -334,7 +335,6 @@ export default class NewGamePopup extends React.Component<NewGamePopupProps, New
         let {
             onSave
         } = this.props
-
 
         let validationRules: ValidationRules
 
