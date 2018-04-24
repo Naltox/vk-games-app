@@ -47,7 +47,7 @@ export default class DropDown extends React.Component<DropDownProps, any> {
     }
 
     _handleClick(e) {
-        if (!ReactDOM.findDOMNode(this).contains(e.target))
+        if (!(ReactDOM.findDOMNode(this) as any).contains(e.target))
             this.setState({ isOpen: false })
     }
 
